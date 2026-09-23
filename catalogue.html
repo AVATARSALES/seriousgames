@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Catalogue Serious Games — Avatar Sales Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B35;
+  --navy-light: #152244;
+  --orange: #FF6B00;
+  --blue: #00AAFF;
+  --white: #FFFFFF;
+  --grey-50: #F7F8FA;
+  --grey-100: #EBEDF2;
+  --grey-200: #D1D5DE;
+  --grey-400: #8B92A5;
+  --grey-600: #545B6E;
+  --green: #22C55E;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(13,27,53,.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --navy: #0A1428; --navy-light: #0F1D3A; --grey-50: #0D1B35; --grey-100: #152244;
+    --grey-200: #1E2D52; --grey-400: #6B7490; --grey-600: #A0A8BC; --white: #F0F2F7;
+    --shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"] {
+  --navy: #0A1428; --navy-light: #0F1D3A; --grey-50: #0D1B35; --grey-100: #152244;
+  --grey-200: #1E2D52; --grey-400: #6B7490; --grey-600: #A0A8BC; --white: #F0F2F7;
+  --shadow: 0 2px 12px rgba(0,0,0,.3);
+}
+:root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--grey-50); color: var(--navy); line-height: 1.55; }
+
+.header { background: var(--navy); color: var(--white); padding: 48px 32px 40px; text-align: center; }
+.header-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px; letter-spacing: 2px; color: var(--orange); margin-bottom: 16px; }
+.header h1 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(24px, 5vw, 36px); line-height: 1.2; margin-bottom: 12px; }
+.header p { color: var(--grey-400); font-size: 15px; max-width: 560px; margin: 0 auto; }
+.stats-row { display: flex; justify-content: center; gap: 32px; margin-top: 28px; flex-wrap: wrap; }
+.stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 28px; color: var(--orange); }
+.stat-label { font-size: 12px; color: var(--grey-400); margin-top: 2px; }
+
+.filters { padding: 16px 32px; background: var(--white); border-bottom: 1px solid var(--grey-100); position: sticky; top: 0; z-index: 10; }
+.filter-group { margin-bottom: 8px; }
+.filter-group:last-child { margin-bottom: 0; }
+.filter-label { font-size: 11px; font-weight: 600; color: var(--grey-400); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 6px; }
+.filter-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill { padding: 5px 12px; border-radius: 20px; border: 1.5px solid var(--grey-200); background: transparent; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--grey-600); cursor: pointer; transition: all .15s; white-space: nowrap; }
+.pill:hover { border-color: var(--blue); color: var(--blue); }
+.pill.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.pill .emoji { margin-right: 3px; }
+.pill-rncp { font-size: 11px; }
+
+.main { padding: 28px 32px 60px; max-width: 1100px; margin: 0 auto; }
+.comp-section { margin-bottom: 36px; }
+.comp-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.comp-icon { width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.comp-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; }
+.comp-count { font-size: 12px; color: var(--grey-400); margin-left: auto; white-space: nowrap; }
+.comp-stars { font-size: 12px; color: var(--orange); margin-top: 2px; }
+
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.card { background: var(--white); border-radius: var(--radius); border: 1px solid var(--grey-100); padding: 16px 18px; transition: box-shadow .2s, border-color .2s; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+.card:hover { box-shadow: var(--shadow); border-color: var(--blue); }
+.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.card-title { font-weight: 600; font-size: 14px; line-height: 1.35; }
+.card-sector { font-size: 10px; padding: 3px 8px; border-radius: 12px; background: var(--grey-100); color: var(--grey-600); white-space: nowrap; flex-shrink: 0; }
+.card-meta { display: flex; gap: 10px; font-size: 11px; color: var(--grey-400); margin-bottom: 8px; }
+.card-meta span { display: flex; align-items: center; gap: 3px; }
+.card-type { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 4px; margin-right: 6px; }
+.type-analyse { background: #EEF4FF; color: #2563EB; }
+.type-gestion { background: #FFF3E0; color: #E65100; }
+.type-enquete { background: #F3E5F5; color: #7B1FA2; }
+.type-quiz { background: #E8F5E9; color: #2E7D32; }
+
+.card-rncp { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px; }
+.rncp-tag { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: var(--grey-50); color: var(--grey-600); border: 1px solid var(--grey-100); font-weight: 500; }
+
+.hidden { display: none !important; }
+.footer { text-align: center; padding: 28px 32px; font-size: 12px; color: var(--grey-400); border-top: 1px solid var(--grey-100); }
+.footer a { color: var(--orange); text-decoration: none; }
+.empty-state { text-align: center; padding: 48px 20px; color: var(--grey-400); font-size: 15px; display: none; }
+.empty-state.visible { display: block; }
+
+@media (max-width: 600px) {
+  .header { padding: 36px 20px 28px; }
+  .filters { padding: 12px 16px; }
+  .main { padding: 20px 16px 48px; }
+  .stats-row { gap: 20px; }
+  .cards-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-logo">AVATAR SALES ACADEMY</div>
+  <h1>Catalogue Serious Games</h1>
+  <p>28 modules de formation gamifiés, classés par compétence commerciale et mappés aux référentiels RNCP. Chaque Serious Game est duplicable et personnalisable par secteur.</p>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">28</div><div class="stat-label">Serious Games</div></div>
+    <div class="stat"><div class="stat-num">6</div><div class="stat-label">Compétences</div></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label">Secteurs</div></div>
+    <div class="stat"><div class="stat-num">21</div><div class="stat-label">Diplômes RNCP</div></div>
+  </div>
+</div>
+
+<div class="filters">
+  <div class="filter-group">
+    <div class="filter-label">Diplôme / Référentiel RNCP</div>
+    <div class="filter-pills" id="rncp-filters">
+      <button class="pill pill-rncp active" data-rncp="all">Tous</button>
+      <button class="pill pill-rncp" data-rncp="bac-pro" title="RNCP38399">Bac Pro Commerce</button>
+      <button class="pill pill-rncp" data-rncp="tp-cv" title="RNCP39141">TP Conseiller Vente</button>
+      <button class="pill pill-rncp" data-rncp="tp-vcm" title="RNCP39143">TP Vendeur Conseil</button>
+      <button class="pill pill-rncp" data-rncp="bts-mco" title="RNCP38362">BTS MCO</button>
+      <button class="pill pill-rncp" data-rncp="bts-ndrc" title="RNCP38363">BTS NDRC</button>
+      <button class="pill pill-rncp" data-rncp="bts-ci" title="RNCP37381">BTS CI</button>
+      <button class="pill pill-rncp" data-rncp="bts-ccst" title="RNCP35522">BTS CCST</button>
+      <button class="pill pill-rncp" data-rncp="bts-com" title="RNCP38360">BTS Com</button>
+      <button class="pill pill-rncp" data-rncp="tp-ntc" title="RNCP34079">TP Négo. TC</button>
+      <button class="pill pill-rncp" data-rncp="tp-mum" title="RNCP38634">TP Manager UM</button>
+      <button class="pill pill-rncp" data-rncp="tp-rcm" title="RNCP36458">TP Resp. Co. Mkt</button>
+      <button class="pill pill-rncp" data-rncp="but-digital" title="RNCP35354">BUT TC Digital</button>
+      <button class="pill pill-rncp" data-rncp="but-intl" title="RNCP35355">BUT TC Intl</button>
+      <button class="pill pill-rncp" data-rncp="but-pdv" title="RNCP35356">BUT TC Point de vente</button>
+      <button class="pill pill-rncp" data-rncp="but-bizdev" title="RNCP35357">BUT TC BizDev</button>
+      <button class="pill pill-rncp" data-rncp="but-marque" title="RNCP35358">BUT TC Marque</button>
+      <button class="pill pill-rncp" data-rncp="bts-banque" title="RNCP38381">BTS Banque</button>
+      <button class="pill pill-rncp" data-rncp="bts-assurance" title="RNCP38359">BTS Assurance</button>
+      <button class="pill pill-rncp" data-rncp="lp-banque" title="RNCP40193">LP Banque Finance</button>
+      <button class="pill pill-rncp" data-rncp="bts-pi" title="RNCP38380">BTS PI</button>
+      <button class="pill pill-rncp" data-rncp="but-cj" title="RNCP35408">BUT Carrières Jur.</button>
+    </div>
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Secteur</div>
+    <div class="filter-pills" id="sector-filters">
+      <button class="pill active" data-sector="all">Tous</button>
+      <button class="pill" data-sector="retail"><span class="emoji">🏪</span>Retail & Sport</button>
+      <button class="pill" data-sector="banque"><span class="emoji">🏦</span>Banque & Assurance</button>
+      <button class="pill" data-sector="auto"><span class="emoji">🚗</span>Automobile</button>
+      <button class="pill" data-sector="b2b"><span class="emoji">📊</span>Retail B2B</button>
+      <button class="pill" data-sector="immo"><span class="emoji">🏠</span>Immobilier</button>
+      <button class="pill" data-sector="fondamentaux"><span class="emoji">🧠</span>Fondamentaux</button>
+      <button class="pill" data-sector="it"><span class="emoji">💻</span>IT & Digital</button>
+    </div>
+  </div>
+  <div class="filter-group">
+    <div class="filter-label">Prise en main</div>
+    <div class="filter-pills" id="level-filters">
+      <button class="pill active" data-level="all">Tous</button>
+      <button class="pill" data-level="1">⭐ Facile</button>
+      <button class="pill" data-level="2">⭐⭐ Inter.</button>
+      <button class="pill" data-level="3">⭐⭐⭐ Avancé</button>
+    </div>
+  </div>
+</div>
+
+<div class="main" id="main">
+
+  <!-- ═══ 1. Négociation & Objections ═══ -->
+  <div class="comp-section">
+    <div class="comp-header">
+      <div class="comp-icon" style="background:#FFF3E0">🤝</div>
+      <div><div class="comp-title">Négociation & Traitement d'objections</div><div class="comp-stars">⭐ Prise en main facile</div></div>
+      <div class="comp-count"></div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" data-sector="fondamentaux" data-level="1" data-rncp="bts-ndrc bts-mco bts-ccst bts-ci tp-ntc tp-cv tp-vcm but-bizdev but-intl bac-pro" href="https://avatarsales.github.io/serious-games/objections-fondamentaux.html" target="_blank">
+        <div class="card-top"><div class="card-title">Gestion des Objections</div><div class="card-sector">🧠 Fondamentaux</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">BTS CI</span><span class="rncp-tag">TP Négo. TC</span><span class="rncp-tag">TP Conseiller Vente</span></div>
+      </a>
+
+      <a class="card" data-sector="immo" data-level="1" data-rncp="bts-ndrc bts-pi tp-ntc but-bizdev" href="https://avatarsales.github.io/serious-games/rdv-objections-immobilier.html" target="_blank">
+        <div class="card-top"><div class="card-title">RDV en Agence & Objections</div><div class="card-sector">🏠 Immobilier</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS PI</span><span class="rncp-tag">TP Négo. TC</span><span class="rncp-tag">BUT TC BizDev</span></div>
+      </a>
+
+      <a class="card" data-sector="banque" data-level="1" data-rncp="bts-ndrc bts-mco bts-banque lp-banque but-cj tp-ntc but-bizdev" href="https://avatarsales.github.io/serious-games/impayes-banque.html" target="_blank">
+        <div class="card-top"><div class="card-title">Gestion d'Impayés</div><div class="card-sector">🏦 Banque</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS Banque</span><span class="rncp-tag">LP Banque</span><span class="rncp-tag">BUT Carrières Jur.</span><span class="rncp-tag">TP Négo. TC</span></div>
+      </a>
+
+      <a class="card" data-sector="retail" data-level="1" data-rncp="bts-mco but-cj tp-cv tp-vcm but-pdv bac-pro" href="https://avatarsales.github.io/serious-games/litige-beaute-retail.html" target="_blank">
+        <div class="card-top"><div class="card-title">Litige Rayon Beauté</div><div class="card-sector">🏪 Retail</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">BUT Carrières Jur.</span><span class="rncp-tag">TP Conseiller Vente</span><span class="rncp-tag">Bac Pro</span></div>
+      </a>
+
+      <a class="card" data-sector="auto" data-level="1" data-rncp="bts-ndrc bts-ccst but-cj tp-ntc" href="https://avatarsales.github.io/serious-games/litige-sav-auto.html" target="_blank">
+        <div class="card-top"><div class="card-title">Litige SAV Concession</div><div class="card-sector">🚗 Auto</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">BUT Carrières Jur.</span><span class="rncp-tag">TP Négo. TC</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══ 2. Relation client & Fidélisation ═══ -->
+  <div class="comp-section">
+    <div class="comp-header">
+      <div class="comp-icon" style="background:#E8F5E9">💬</div>
+      <div><div class="comp-title">Relation client & Fidélisation</div><div class="comp-stars">⭐ à ⭐⭐ Facile à intermédiaire</div></div>
+      <div class="comp-count"></div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" data-sector="fondamentaux" data-level="1" data-rncp="bts-ndrc bts-mco bts-ccst tp-cv tp-vcm tp-ntc but-bizdev but-pdv bac-pro" href="https://avatarsales.github.io/serious-games/entretien-vente-fondamentaux.html" target="_blank">
+        <div class="card-top"><div class="card-title">Analyse Entretien de Vente</div><div class="card-sector">🧠 Fondamentaux</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Conseiller Vente</span><span class="rncp-tag">Bac Pro</span></div>
+      </a>
+
+      <a class="card" data-sector="auto" data-level="1" data-rncp="bts-ndrc bts-ccst tp-ntc tp-cv" href="https://avatarsales.github.io/serious-games/ecoute-active-auto.html" target="_blank">
+        <div class="card-top"><div class="card-title">Écoute Active — Concession</div><div class="card-sector">🚗 Auto</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">TP Négo. TC</span></div>
+      </a>
+
+      <a class="card" data-sector="retail" data-level="1" data-rncp="bts-mco tp-cv tp-vcm but-pdv bac-pro" href="https://avatarsales.github.io/serious-games/vendeur-conseil-sport.html" target="_blank">
+        <div class="card-top"><div class="card-title">Sport — Vendeur Conseil</div><div class="card-sector">🏪 Retail</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Vendeur Conseil</span><span class="rncp-tag">BUT TC PDV</span><span class="rncp-tag">Bac Pro</span></div>
+      </a>
+
+      <a class="card" data-sector="it" data-level="1" data-rncp="bts-ndrc bts-ccst tp-cv tp-vcm but-digital" href="https://avatarsales.github.io/serious-games/accueil-boutique-it.html" target="_blank">
+        <div class="card-top"><div class="card-title">Accueil Client en Boutique</div><div class="card-sector">💻 IT & Digital</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h30</span><span>👥 Débat collectif</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">TP Conseiller Vente</span></div>
+      </a>
+
+      <a class="card" data-sector="banque" data-level="2" data-rncp="bts-ndrc bts-mco bts-banque bts-assurance lp-banque tp-ntc but-bizdev" href="https://avatarsales.github.io/serious-games/assurance-mobile-banque.html" target="_blank">
+        <div class="card-top"><div class="card-title">Assurance Mobile — Rebond</div><div class="card-sector">🏦 Banque</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 1h30</span><span>💡 Vente additionnelle</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS Banque</span><span class="rncp-tag">BTS Assurance</span><span class="rncp-tag">LP Banque</span><span class="rncp-tag">TP Négo. TC</span></div>
+      </a>
+
+      <a class="card" data-sector="banque" data-level="2" data-rncp="bts-ndrc bts-mco bts-banque bts-assurance lp-banque tp-ntc but-bizdev" href="https://avatarsales.github.io/serious-games/assurance-auto-banque.html" target="_blank">
+        <div class="card-top"><div class="card-title">Assurance Auto — Rebond</div><div class="card-sector">🏦 Banque</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 1h30</span><span>💡 Vente additionnelle</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS Banque</span><span class="rncp-tag">BTS Assurance</span><span class="rncp-tag">LP Banque</span><span class="rncp-tag">TP Négo. TC</span></div>
+      </a>
+
+      <a class="card" data-sector="retail" data-level="2" data-rncp="bts-mco bts-ccst tp-cv tp-vcm but-pdv" href="https://avatarsales.github.io/serious-games/trail-conseiller-retail.html" target="_blank">
+        <div class="card-top"><div class="card-title">Trail — Conseiller Expert</div><div class="card-sector">🏪 Retail</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 1h30</span><span>💡 Conseil expert</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">TP Vendeur Conseil</span></div>
+      </a>
+
+      <a class="card" data-sector="banque" data-level="2" data-rncp="bts-ndrc bts-banque lp-banque tp-ntc but-bizdev" href="https://avatarsales.github.io/serious-games/compte-joint-ptz-banque.html" target="_blank">
+        <div class="card-top"><div class="card-title">Compte Joint & PTZ</div><div class="card-sector">🏦 Banque</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 2h</span><span>💡 Conseil bancaire</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS Banque</span><span class="rncp-tag">LP Banque</span><span class="rncp-tag">TP Négo. TC</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══ 3. Prospection & Pitch ═══ -->
+  <div class="comp-section">
+    <div class="comp-header">
+      <div class="comp-icon" style="background:#EDE7F6">🎯</div>
+      <div><div class="comp-title">Prospection & Pitch commercial</div><div class="comp-stars">⭐⭐ Prise en main intermédiaire</div></div>
+      <div class="comp-count"></div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" data-sector="it" data-level="2" data-rncp="bts-ndrc bts-ccst bts-com tp-ntc tp-rcm but-digital but-bizdev" href="https://avatarsales.github.io/serious-games/pitch-freshnotes-it.html" target="_blank">
+        <div class="card-top"><div class="card-title">Pitch Commercial — FreshNotes</div><div class="card-sector">💻 IT & Digital</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 1h30</span><span>🎤 Construction pitch</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">BTS Com</span><span class="rncp-tag">TP Négo. TC</span><span class="rncp-tag">BUT TC Digital</span></div>
+      </a>
+
+      <a class="card" data-sector="b2b" data-level="2" data-rncp="bts-ndrc bts-ccst tp-ntc but-digital but-bizdev" href="https://avatarsales.github.io/serious-games/digitaliser-artisan-b2b.html" target="_blank">
+        <div class="card-top"><div class="card-title">Digitaliser l'Artisan — B2B</div><div class="card-sector">📊 B2B</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 2h</span><span>🎤 Stratégie digitale</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">TP Négo. TC</span><span class="rncp-tag">BUT TC Digital</span></div>
+      </a>
+
+      <a class="card" data-sector="b2b" data-level="2" data-rncp="bts-ndrc bts-com tp-rcm but-digital but-marque" href="https://avatarsales.github.io/serious-games/marketing-digital-b2b.html" target="_blank">
+        <div class="card-top"><div class="card-title">Marketing Digital B2B — LeadForce</div><div class="card-sector">📊 B2B</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 2h</span><span>🎤 Lead generation</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS Com</span><span class="rncp-tag">TP Resp. Co. Mkt</span><span class="rncp-tag">BUT TC Digital</span></div>
+      </a>
+
+      <a class="card" data-sector="it" data-level="2" data-rncp="bts-ndrc bts-com tp-rcm but-digital but-marque" href="https://avatarsales.github.io/serious-games/erreurs-marketing-it.html" target="_blank">
+        <div class="card-top"><div class="card-title">Analyse 6 Erreurs Marketing</div><div class="card-sector">💻 IT & Digital</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 1h30</span><span>🔍 Diagnostic</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS Com</span><span class="rncp-tag">TP Resp. Co. Mkt</span><span class="rncp-tag">BUT TC Digital</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══ 4. Recrutement & Posture pro ═══ -->
+  <div class="comp-section">
+    <div class="comp-header">
+      <div class="comp-icon" style="background:#FFF8E1">📋</div>
+      <div><div class="comp-title">Recrutement & Posture professionnelle</div><div class="comp-stars">⭐⭐ Prise en main intermédiaire</div></div>
+      <div class="comp-count"></div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" data-sector="fondamentaux" data-level="2" data-rncp="bts-ndrc bts-mco bts-com tp-cv tp-vcm tp-ntc tp-rcm but-bizdev but-digital bac-pro" href="https://avatarsales.github.io/serious-games/headhunter-fondamentaux.html" target="_blank">
+        <div class="card-top"><div class="card-title">Atelier Headhunter — SPEED-UP</div><div class="card-sector">🧠 Fondamentaux</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 2h</span><span>📋 Analyse CV</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">BTS Com</span><span class="rncp-tag">Tous TP</span><span class="rncp-tag">Bac Pro</span></div>
+      </a>
+
+      <a class="card" data-sector="it" data-level="2" data-rncp="bts-ndrc bts-ccst bts-com tp-ntc tp-rcm but-digital but-bizdev" href="https://avatarsales.github.io/serious-games/recrutement-cloudfake-it.html" target="_blank">
+        <div class="card-top"><div class="card-title">Recrutement Cloudfake Academy</div><div class="card-sector">💻 IT & Digital</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 2h</span><span>📋 Analyse CV</span></div>
+        <div><span class="card-type type-analyse">Analyse de scénario</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">TP Négo. TC</span><span class="rncp-tag">TP Resp. Co. Mkt</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══ 5. Psychologie & Soft Skills ═══ -->
+  <div class="comp-section">
+    <div class="comp-header">
+      <div class="comp-icon" style="background:#FCE4EC">🧠</div>
+      <div><div class="comp-title">Psychologie de vente & Soft Skills</div><div class="comp-stars">⭐ à ⭐⭐ Tous niveaux</div></div>
+      <div class="comp-count"></div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" data-sector="fondamentaux" data-level="1" data-rncp="bts-ndrc bts-mco bts-ccst tp-cv tp-vcm tp-ntc but-bizdev but-pdv bac-pro" href="https://avatarsales.github.io/serious-games/soncas-fondamentaux.html" target="_blank">
+        <div class="card-top"><div class="card-title">Personnages SONCAS</div><div class="card-sector">🧠 Fondamentaux</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h</span><span>🧩 Profilage client</span></div>
+        <div><span class="card-type type-quiz">Scénarisation + Quiz</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Conseiller Vente</span><span class="rncp-tag">Bac Pro</span></div>
+      </a>
+
+      <a class="card" data-sector="fondamentaux" data-level="1" data-rncp="bts-ndrc bts-mco bts-com tp-cv tp-vcm tp-ntc tp-rcm but-bizdev but-marque bac-pro" href="https://avatarsales.github.io/serious-games/disc-fondamentaux.html" target="_blank">
+        <div class="card-top"><div class="card-title">Test de Personnalité DISC</div><div class="card-sector">🧠 Fondamentaux</div></div>
+        <div class="card-meta"><span>⭐ Facile</span><span>⏱ 1h</span><span>🧩 Profilage client</span></div>
+        <div><span class="card-type type-quiz">Scénarisation + Quiz</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">BTS Com</span><span class="rncp-tag">Tous niveaux</span></div>
+      </a>
+
+      <a class="card" data-sector="fondamentaux" data-level="2" data-rncp="bts-mco tp-mum tp-rcm but-pdv" href="https://avatarsales.github.io/serious-games/motivation-danger-fondamentaux.html" target="_blank">
+        <div class="card-top"><div class="card-title">Motivation en Danger</div><div class="card-sector">🧠 Fondamentaux</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 1h30</span><span>💡 Coaching équipe</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Manager UM</span><span class="rncp-tag">TP Resp. Co. Mkt</span></div>
+      </a>
+
+      <a class="card" data-sector="retail" data-level="2" data-rncp="bts-mco tp-mum tp-rcm but-pdv" href="https://avatarsales.github.io/serious-games/manager-rayon-retail.html" target="_blank">
+        <div class="card-top"><div class="card-title">Manager de Rayon — DESC/CNV</div><div class="card-sector">🏪 Retail</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 2h</span><span>💡 Management</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Manager UM</span><span class="rncp-tag">TP Resp. Co. Mkt</span></div>
+      </a>
+
+      <a class="card" data-sector="retail" data-level="2" data-rncp="bts-mco tp-mum tp-vcm but-pdv bac-pro" href="https://avatarsales.github.io/serious-games/merchandising-retail.html" target="_blank">
+        <div class="card-top"><div class="card-title">Merchandising & Planogramme</div><div class="card-sector">🏪 Retail</div></div>
+        <div class="card-meta"><span>⭐⭐ Inter.</span><span>⏱ 1h30</span><span>🏪 Visual merchandising</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Manager UM</span><span class="rncp-tag">BUT TC PDV</span><span class="rncp-tag">Bac Pro</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══ 6. Gestion de portefeuille & Situations complexes ═══ -->
+  <div class="comp-section">
+    <div class="comp-header">
+      <div class="comp-icon" style="background:#E3F2FD">📊</div>
+      <div><div class="comp-title">Gestion de portefeuille & Situations complexes</div><div class="comp-stars">⭐⭐⭐ Prise en main avancée</div></div>
+      <div class="comp-count"></div>
+    </div>
+    <div class="cards-grid">
+
+      <a class="card" data-sector="retail" data-level="3" data-rncp="bts-mco tp-mum tp-vcm but-pdv" href="https://avatarsales.github.io/serious-games/crise-caisse-v1-retail.html" target="_blank">
+        <div class="card-top"><div class="card-title">Crise en Caisse V1</div><div class="card-sector">🏪 Retail</div></div>
+        <div class="card-meta"><span>⭐⭐⭐ Avancé</span><span>⏱ 2h</span><span>🔥 Gestion de crise</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Manager UM</span><span class="rncp-tag">BUT TC PDV</span></div>
+      </a>
+
+      <a class="card" data-sector="retail" data-level="3" data-rncp="bts-mco tp-mum tp-vcm but-pdv" href="https://avatarsales.github.io/serious-games/crise-caisse-v2-retail.html" target="_blank">
+        <div class="card-top"><div class="card-title">Crise en Caisse V2 — Timer ELDPH</div><div class="card-sector">🏪 Retail</div></div>
+        <div class="card-meta"><span>⭐⭐⭐ Avancé</span><span>⏱ 2h</span><span>🔥 Gestion de crise</span></div>
+        <div><span class="card-type type-gestion">Gestion de situation</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS MCO</span><span class="rncp-tag">TP Manager UM</span><span class="rncp-tag">BUT TC PDV</span></div>
+      </a>
+
+      <a class="card" data-sector="b2b" data-level="3" data-rncp="bts-ndrc bts-ccst tp-ntc tp-rcm but-bizdev" href="https://avatarsales.github.io/serious-games/3-dossiers-priorite-b2b.html" target="_blank">
+        <div class="card-top"><div class="card-title">3 Dossiers 1 Priorité</div><div class="card-sector">📊 B2B</div></div>
+        <div class="card-meta"><span>⭐⭐⭐ Avancé</span><span>⏱ 2h</span><span>📊 Priorisation</span></div>
+        <div><span class="card-type type-enquete">Enquête stratégique</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">TP Négo. TC</span><span class="rncp-tag">TP Resp. Co. Mkt</span></div>
+      </a>
+
+      <a class="card" data-sector="auto" data-level="3" data-rncp="bts-ndrc bts-ccst tp-ntc but-bizdev but-intl" href="https://avatarsales.github.io/serious-games/dossiers-acheteurs-bmw-auto.html" target="_blank">
+        <div class="card-top"><div class="card-title">Dossiers Acheteurs BMW</div><div class="card-sector">🚗 Auto</div></div>
+        <div class="card-meta"><span>⭐⭐⭐ Avancé</span><span>⏱ 2h</span><span>📊 Priorisation</span></div>
+        <div><span class="card-type type-enquete">Enquête stratégique</span></div>
+        <div class="card-rncp"><span class="rncp-tag">BTS NDRC</span><span class="rncp-tag">BTS CCST</span><span class="rncp-tag">TP Négo. TC</span><span class="rncp-tag">BUT TC BizDev</span></div>
+      </a>
+
+    </div>
+  </div>
+
+  <div class="empty-state" id="empty-state">Aucun Serious Game ne correspond à ces filtres. Essayez une autre combinaison.</div>
+</div>
+
+<div class="footer">
+  Avatar Sales Academy · <a href="https://avatar-sales-academy.com" target="_blank">avatar-sales-academy.com</a> · <a href="mailto:contact@avatar-sales-academy.com">contact@avatar-sales-academy.com</a><br>
+  Organisme certifié Qualiopi · Formation commerciale gamifiée
+</div>
+
+<script>
+(function() {
+  let activeSector = 'all', activeLevel = 'all', activeRncp = 'all';
+
+  function bind(containerId, key, setter) {
+    document.getElementById(containerId).addEventListener('click', e => {
+      const pill = e.target.closest('.pill');
+      if (!pill) return;
+      document.querySelectorAll('#' + containerId + ' .pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      setter(pill.dataset[key]);
+      applyFilters();
+    });
+  }
+
+  bind('sector-filters', 'sector', v => activeSector = v);
+  bind('level-filters', 'level', v => activeLevel = v);
+  bind('rncp-filters', 'rncp', v => activeRncp = v);
+
+  function applyFilters() {
+    let total = 0;
+    document.querySelectorAll('.comp-section').forEach(section => {
+      let vis = 0;
+      section.querySelectorAll('.card').forEach(card => {
+        const mS = activeSector === 'all' || card.dataset.sector === activeSector;
+        const mL = activeLevel === 'all' || card.dataset.level === activeLevel;
+        const mR = activeRncp === 'all' || (card.dataset.rncp && card.dataset.rncp.split(' ').includes(activeRncp));
+        const show = mS && mL && mR;
+        card.classList.toggle('hidden', !show);
+        if (show) vis++;
+      });
+      section.classList.toggle('hidden', vis === 0);
+      const c = section.querySelector('.comp-count');
+      if (c) c.textContent = vis + ' module' + (vis > 1 ? 's' : '');
+      total += vis;
+    });
+    document.getElementById('empty-state').classList.toggle('visible', total === 0);
+  }
+
+  applyFilters();
+})();
+</script>
+</body>
+</html>
