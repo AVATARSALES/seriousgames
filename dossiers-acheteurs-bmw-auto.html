@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Atelier Dossiers Acheteurs — Pôle Automobile — Expertise Relationnelle · ASA</title>
+<title>Atelier Dossiers Acheteurs — Support étudiant · ASA</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -155,6 +155,31 @@ body{display:flex;flex-direction:column;align-items:center}
 .footer a{color:rgba(0,170,255,0.35);text-decoration:none}
 
 .module-panel{display:block!important}
+
+.profils-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.profil-card{background:var(--navy3);border-radius:11px;padding:13px 14px;border-top:3px solid var(--orange);position:relative}
+.profil-nom{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.profil-surnom{font-size:10px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px}
+.profil-cv{font-size:11.5px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.profil-trait{font-size:12px;line-height:1.55;color:var(--light);margin-bottom:4px;padding-left:12px;position:relative}
+.profil-trait::before{content:"→";position:absolute;left:0;color:var(--orange);font-size:10px}
+.crit-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.crit-table th{text-align:left;padding:8px 10px;color:var(--orange);border-bottom:2px solid var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.crit-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top}
+.crit-w{color:#ffb347;font-weight:700;text-align:center;white-space:nowrap}
+.crit-sub{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.bar{height:6px;border-radius:3px;background:var(--orange);margin-top:6px}
+.stepper{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.stp{background:var(--navy3);border-radius:10px;padding:10px 12px}
+.stp-n{font-family:'Syne',sans-serif;font-weight:700;color:var(--orange);font-size:12px}
+.stp-t{font-weight:600;color:#fff;font-size:12.5px;margin:3px 0}
+.stp-d{font-size:11.5px;color:var(--muted);line-height:1.45}
+.rule{background:rgba(255,179,71,0.07);border:1px solid rgba(255,179,71,0.3);border-radius:10px;padding:11px 14px;font-size:12.5px;line-height:1.6}
+.rule b{color:#ffb347}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.mini{background:var(--navy3);border-radius:9px;padding:10px 12px;font-size:12px;line-height:1.5;color:var(--muted)}
+.mini strong{color:#fff;display:block;margin-bottom:3px}
+.linkbox{font-size:12px;color:var(--muted);margin-top:8px}
 </style>
 </head>
 <body>
@@ -163,7 +188,7 @@ body{display:flex;flex-direction:column;align-items:center}
 <div class="logo">ASA</div>
 <div class="header-info">
 <div class="header-title">Fiche Pédagogique — Avatar Sales Academy</div>
-<div class="header-sub">Support formateur · Serious Game gamifié</div>
+<div class="header-sub">Support étudiant · Serious Game gamifié</div>
 </div>
 <div class="badge-off">Support pédagogique</div>
 </div>
@@ -171,50 +196,45 @@ body{display:flex;flex-direction:column;align-items:center}
 <div class="pole-icon">🚗</div>
 <div class="pole-info">
 <div class="pole-name">Pôle Automobile — Expertise Relationnelle</div>
-<div class="pole-desc">Gestion de litige · Écoute active · Relation client en concession</div>
+<div class="pole-desc">Analyse de dossiers acheteurs · Financement · Closing en concession</div>
 </div>
 <div class="pole-badge">Atelier Dossiers Acheteurs</div>
 </div>
 <div class="content">
-<div class="meta-row">
-<span class="meta orange">⏱ 15 min</span><span class="meta blue">📋 BMW 80 000€ · 4 dossiers</span>
-<span class="meta green">👥 Équipes 3-4</span><span class="meta purple">🔍 Analyse · Classement · Quiz</span>
-</div>
-<div class="tabs">
+<div class="meta-row"><span class="meta orange">⏱ 1 h 30</span><span class="meta blue">📋 BMW 80 000 € · 4 dossiers</span><span class="meta green">👥 Équipes 3-5</span><span class="meta purple">🔍 Analyse · Grille · Pitch · Quiz</span></div>
+<div class="tabs" id="tabs-main">
 <div class="tab active" onclick="st('scenario')">📖 Scénario</div>
 <div class="tab" onclick="st('objectifs')">🎯 Objectifs</div>
+<div class="tab" onclick="st('methode')">🧭 Méthode &amp; grille</div>
 </div>
 <div class="tab-panel active" id="main-scenario">
 <div class="section"><div class="sec-title">Résumé du scénario</div>
-<div class="card">L'apprenant est <strong>conseiller(ère) commercial(e) automobile</strong>. <strong>M. Ferrara</strong>, directeur de la concession, doit impérativement écouler une <strong>BMW Série 7 berline à 80 000€</strong> avant la fin du mois (clôture de bilan, objectif constructeur). Quatre acheteurs potentiels ont essayé le véhicule cette semaine.<br/><br/>Mission : analyser chaque dossier en 4 minutes, <strong>classer les 4 profils par pertinence</strong> pour M. Ferrara, et présenter la recommandation argumentée. Le coach <strong>Célia</strong> donne un feedback détaillé selon l'analyse.</div>
-</div>
-<div class="section"><div class="sec-title">Contexte urgent — M. Ferrara</div>
-<div class="card"><strong style="">⏰ Urgence :</strong> Clôture de bilan en fin de mois · Objectif constructeur à atteindre · Véhicule en stock immédiat<br/><br/><strong style="color:var(--orange)">Critères de sélection :</strong> Financement sécurisé · Délai de livraison compatible · Prix catalogue accepté · Dossier bancaire solide</div>
-</div>
-<div class="section"><div class="sec-title">Les 4 profils acheteurs</div>
-<div class="steps">
-<div class="step"><span class="step-n" style="color:var(--orange);background:rgba(255,107,0,0.1);border-color:rgba(255,107,0,0.2)">Ousmane<br/>Le Prudent</span><div class="step-body">
-<strong>CDI Ingénieur R&amp;D</strong> · Intéressé mais conditionne l'achat à la revente de son Audi A6 actuelle (2-3 mois) + réservation 6 semaines + inspection mécanique indépendante (+2 semaines) + remise –7% (74 400€)
-          
-
+<div class="card">Vous êtes <strong>conseiller(ère) commercial(e)</strong> dans une concession BMW Premium. <strong>M. Ferrara</strong>, directeur de la concession, doit impérativement vendre une <strong>BMW Série 7 berline à 80 000 €</strong> avant la fin du mois (clôture de bilan, objectif constructeur). Quatre acheteurs ont essayé le véhicule cette semaine.<br/><br/>Mission : analyser les 4 dossiers acheteurs, les noter dans la grille pondérée, choisir le dossier à présenter à M. Ferrara et défendre votre recommandation.</div></div>
+<div class="section"><div class="sec-title">Ce que M. Ferrara attend de vous</div>
+<div class="card"><strong style="color:var(--orange)">80 000 €</strong> prix catalogue de la BMW Série 7 berline · <strong style="color:var(--orange)">4</strong> acheteurs ont essayé le véhicule cette semaine · <strong style="color:var(--orange)">Fin de mois</strong> clôture de bilan et objectif constructeur<br/><br/>→ Un financement sécurisé, pas seulement une promesse<br/>→ Une signature et une livraison possibles avant la clôture<br/>→ Le prix catalogue défendu : chaque remise réduit la marge de la concession<br/>→ Une négociation loyale qui respecte le rôle du conseiller</div></div>
+<div class="section"><div class="sec-title">Les 4 dossiers acheteurs</div>
+<div class="profils-grid"><div class="profil-card">
+<div class="profil-nom">Ousmane</div>
+<div class="profil-surnom">Dossier 1</div>
+<div class="profil-cv">Ingénieur R&amp;D en CDI</div>
+<div class="profil-trait">Financement conditionné à la revente de son Audi A6 (2 à 3 mois)</div><div class="profil-trait">Offre à 74 400 € (–7 %) et inspection indépendante</div><div class="profil-trait">Délai cumulé estimé à 8 semaines minimum</div>
+</div><div class="profil-card">
+<div class="profil-nom">Idriss</div>
+<div class="profil-surnom">Dossier 2</div>
+<div class="profil-cv">Chef d'entreprise, gérant associé</div>
+<div class="profil-trait">Accord de financement pro validé, apport de 25 %</div><div class="profil-trait">Prix catalogue de 80 000 € accepté</div><div class="profil-trait">Signature sous 48 h, livraison souhaitée en 3 semaines</div>
+</div><div class="profil-card">
+<div class="profil-nom">Béatrice</div>
+<div class="profil-surnom">Dossier 3</div>
+<div class="profil-cv">Responsable marketing en CDI</div>
+<div class="profil-trait">Coup de cœur fort lors de l'essai</div><div class="profil-trait">Aucune simulation de crédit, banquier absent 3 semaines</div><div class="profil-trait">Séparation en cours, caution parentale envisagée</div>
+</div><div class="profil-card">
+<div class="profil-nom">Diane</div>
+<div class="profil-surnom">Dossier 4</div>
+<div class="profil-cv">Gérante d'une holding</div>
+<div class="profil-trait">Paiement comptant, fonds disponibles</div><div class="profil-trait">Offre à 68 000 € (–15 %) avec ultimatum au vendredi</div><div class="profil-trait">Veut traiter directement avec M. Ferrara</div>
 </div></div>
-<div class="step"><span class="step-n" style="color:var(--orange);background:rgba(255,107,0,0.1);border-color:rgba(255,107,0,0.2)">Idriss<br/>Le Décideur</span><div class="step-body">
-<strong>Chef d'entreprise</strong> · 2e visite avec son associé · Dossier béton : financement bancaire professionnel validé, apport 25%, validé par expert-comptable · Accepte le prix catalogue 80 000€ sans négociation · Signature possible dès demain · Livraison souhaitée dans 3 semaines · Budget options 3 000€ prévu
-          
-
-</div></div>
-<div class="step"><span class="step-n" style="color:var(--orange);background:rgba(255,107,0,0.1);border-color:rgba(255,107,0,0.2)">Béatrice<br/>La Rêveuse</span><div class="step-body">
-<strong>CDI Responsable marketing</strong> · Coup de cœur total pour la BMW · Mais : en cours de séparation (dossier bancaire fragilisé), banquier en vacances 3 semaines, aucune simulation de crédit, envisage caution solidaire parents en cas de refus
-          
-
-</div></div>
-<div class="step"><span class="step-n" style="color:var(--orange);background:rgba(255,107,0,0.1);border-color:rgba(255,107,0,0.2)">Diane<br/>La Pressée</span><div class="step-body">
-<strong>Gérante de société</strong> · Offre cash à 68 000€ (–15% du catalogue) · Justification : marché premium ralentit, absence de pack Premium · Tente de contourner la concession pour traiter directement avec M. Ferrara · Propose au conseiller de renoncer à sa commission
-          
-
-</div></div>
-</div>
-</div>
+<div class="linkbox">⚠️ Les 4 acheteurs ont essayé le même véhicule. L'enthousiasme ou le paiement comptant ne suffisent pas : seuls les faits du dossier et les comportements observés comptent.</div></div>
 </div>
 <div class="tab-panel" id="main-objectifs">
 <div class="section"><div class="sec-title">Activité réalisée</div>
@@ -226,8 +246,23 @@ body{display:flex;flex-direction:column;align-items:center}
 <div class="obj-block"><div class="obj-block-title">Savoir-être</div><div class="obj-block-body">Adopter une posture d'analyse froide face à l'enthousiasme client. Défendre les intérêts de la concession face à une offre agressive et à une tentative de court-circuitage. Communiquer un refus argumenté à un acheteur en lui proposant une alternative commerciale constructive.<div class="verbs"><span class="verb">Adopter</span><span class="verb">Défendre</span><span class="verb">Communiquer</span></div></div></div>
 </div>
 <div class="section"><div class="sec-title">Modalités</div>
-<div class="card"><strong style="color:var(--orange)">Format :</strong> Atelier d'analyse · 4 dossiers · Classement en 4 minutes · Feedback Célia selon résultat · Quiz 6 questions<br/><strong style="color:var(--orange)">Durée :</strong> 15 min atelier + 20 min débriefing · <strong style="color:var(--orange)">Groupement :</strong> Équipes 3-4 apprenants (recommandé) ou individuel<br/><strong style="color:var(--orange)">Prérequis :</strong> Notions de financement automobile (crédit, apport, accord de principe)</div>
+<div class="card"><strong style="color:var(--orange)">Format :</strong> Atelier d'analyse · 4 dossiers · Classement en 4 minutes · Feedback Célia selon résultat · Quiz 6 questions<br/><strong style="color:var(--orange)">Durée :</strong> 1 h 30 (voir l'onglet Méthode) · <strong style="color:var(--orange)">Groupement :</strong> Équipes 3-4 apprenants (recommandé) ou individuel<br/><strong style="color:var(--orange)">Prérequis :</strong> Notions de financement automobile (crédit, apport, accord de principe)</div>
 </div>
+</div>
+<div class="tab-panel" id="main-methode">
+<div class="section"><div class="sec-title">Le parcours en 6 étapes (1 h 30)</div><div class="stepper"><div class="stp"><div class="stp-n">1 · 10 min</div><div class="stp-t">S'approprier le contexte</div><div class="stp-d">Lire le contexte de la concession et les attentes de M. Ferrara</div></div><div class="stp"><div class="stp-n">2 · 20 min</div><div class="stp-t">Écouter les entretiens</div><div class="stp-d">Suivre les 4 entretiens dans le module et noter les faits clés</div></div><div class="stp"><div class="stp-n">3 · 15 min</div><div class="stp-t">Analyser et noter seul</div><div class="stp-d">Lire les 4 fiches, puis noter chaque dossier dans la grille Excel</div></div><div class="stp"><div class="stp-n">4 · 20 min</div><div class="stp-t">Délibérer en équipe</div><div class="stp-d">Comparer les notes, débattre et fixer un choix commun</div></div><div class="stp"><div class="stp-n">5 · 15 min</div><div class="stp-t">Défendre son choix</div><div class="stp-d">Pitch de 3 min face aux autres équipes, puis questions</div></div><div class="stp"><div class="stp-n">6 · 10 min</div><div class="stp-t">Quiz et débrief</div><div class="stp-d">Faire le quiz du module et comparer avec le débrief</div></div></div></div>
+<div class="section"><div class="sec-title">La grille d'évaluation pondérée</div>
+<div class="card" style="margin-bottom:8px">Fichier à compléter : <strong style="color:var(--orange)">AUTO_DossiersAcheteurs_grille_evaluation_ETUDIANT.xlsx</strong>, à renommer EQUIPE_&lt;nom&gt;.xlsx. Notez chaque dossier de 1 à 5 dans les cellules orange, justifiez chaque note en colonne G par un fait ou une réplique, puis saisissez votre choix et 3 arguments. Le score sur 100 et le classement se calculent seuls.</div>
+<table class="crit-table"><thead><tr><th>Critère</th><th style="text-align:center">Poids</th></tr></thead><tbody><tr><td><strong>Solidité financière</strong><span class="crit-sub">Apport, financement validé</span><div class="bar" style="width:90%"></div></td><td class="crit-w">30 %</td></tr><tr><td><strong>Engagement d'achat</strong><span class="crit-sub">Prix accepté, décision prise</span><div class="bar" style="width:75%"></div></td><td class="crit-w">25 %</td></tr><tr><td><strong>Délai et faisabilité</strong><span class="crit-sub">Closing avant la fin du mois</span><div class="bar" style="width:60%"></div></td><td class="crit-w">20 %</td></tr><tr><td><strong>Risque comportemental</strong><span class="crit-sub">Mauvaise foi, contournement</span><div class="bar" style="width:45%"></div></td><td class="crit-w">15 %</td></tr><tr><td><strong>Potentiel de fidélisation</strong><span class="crit-sub">Entretien, recommandation, rachat</span><div class="bar" style="width:30%"></div></td><td class="crit-w">10 %</td></tr></tbody></table>
+<div class="linkbox">Ils traduisent la situation de M. Ferrara : être payé (solidité financière), vendre au bon prix (engagement), avant la clôture (délai), sans se faire piéger (risque) et en gagnant un client durable (fidélisation).</div></div>
+<div class="section"><div class="sec-title">Barème</div>
+<div class="card"><strong style="color:var(--green)">5</strong> atout décisif · <strong style="color:var(--green)">4</strong> point fort · <strong>3</strong> neutre · <strong style="color:#ffb347">2</strong> signal d'alerte · <strong style="color:#ff6b6b">1</strong> inadapté</div>
+<div class="rule" style="margin-top:8px"><b>Règle éliminatoire :</b> Une note de 1 en « Risque comportemental » écarte le dossier (score affiché : 0). Un acheteur qui pose un ultimatum, veut court-circuiter le conseiller ou demande qu'il renonce à sa commission met la vente et la concession en danger.</div></div>
+<div class="section"><div class="sec-title">Trois pièges à éviter</div><div class="three"><div class="mini"><strong>Le biais du cash</strong>« Elle paie comptant » : oui, mais à –15 % et sous pression.</div><div class="mini"><strong>Le biais de l'enthousiasme</strong>Le coup de cœur ne remplace pas un financement accordé.</div><div class="mini"><strong>Le biais de la prudence</strong>Sérieux et méthodique ne veut pas dire solvable dans les délais.</div></div>
+<div class="linkbox"><strong style="color:#fff">La bonne question n'est pas « Qui veut le plus cette voiture ? » </strong>mais « Quel dossier sécurise la vente, au bon prix, avant la fin du mois ? »</div></div>
+<div class="section"><div class="sec-title">Vos livrables</div>
+<div class="card">→ La grille Excel d'équipe (20 notes justifiées, choix final, 3 arguments)<br/>→ Un pitch de 3 minutes : votre choix et pourquoi pas les 3 autres<br/>→ Bonus fidélisation : Une proposition pour un acheteur écarté<br/><br/><strong style="color:var(--orange)">Un bon argument :</strong> un fait (qui dit quoi), ce qu'il révèle, et l'objectif de M. Ferrara concerné.</div></div>
+<div class="section"><div class="sec-title">Pour aller plus loin : la fidélisation</div><div class="card" style="margin-bottom:8px">Les trois acheteurs non retenus ne sont pas de mauvais clients. Ils sont dans le mauvais timing ou la mauvaise situation financière.</div><div class="three"><div class="mini"><strong>Q1</strong>Quel véhicule ou quelle offre proposer à chaque acheteur écarté ?</div><div class="mini"><strong>Q2</strong>Comment annoncer un refus sans perdre la relation ?</div><div class="mini"><strong>Q3</strong>Comment refuser l'ultimatum de Diane tout en restant professionnel ?</div></div></div>
 </div>
 </div>
 <div class="footer">Avatar Sales Academy</div>

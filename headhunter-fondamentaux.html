@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Atelier Headhunter — Fondamentaux &amp; Psychologie de Vente · ASA</title>
+<title>Atelier HeadHunter — Support étudiant · ASA</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -155,6 +155,31 @@ body{display:flex;flex-direction:column;align-items:center}
 .footer a{color:rgba(0,170,255,0.35);text-decoration:none}
 
 .module-panel{display:block!important}
+
+.profils-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.profil-card{background:var(--navy3);border-radius:11px;padding:13px 14px;border-top:3px solid var(--orange);position:relative}
+.profil-nom{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.profil-surnom{font-size:10px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px}
+.profil-cv{font-size:11.5px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.profil-trait{font-size:12px;line-height:1.55;color:var(--light);margin-bottom:4px;padding-left:12px;position:relative}
+.profil-trait::before{content:"→";position:absolute;left:0;color:var(--orange);font-size:10px}
+.crit-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.crit-table th{text-align:left;padding:8px 10px;color:var(--orange);border-bottom:2px solid var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.crit-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top}
+.crit-w{color:#ffb347;font-weight:700;text-align:center;white-space:nowrap}
+.crit-sub{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.bar{height:6px;border-radius:3px;background:var(--orange);margin-top:6px}
+.stepper{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.stp{background:var(--navy3);border-radius:10px;padding:10px 12px}
+.stp-n{font-family:'Syne',sans-serif;font-weight:700;color:var(--orange);font-size:12px}
+.stp-t{font-weight:600;color:#fff;font-size:12.5px;margin:3px 0}
+.stp-d{font-size:11.5px;color:var(--muted);line-height:1.45}
+.rule{background:rgba(255,179,71,0.07);border:1px solid rgba(255,179,71,0.3);border-radius:10px;padding:11px 14px;font-size:12.5px;line-height:1.6}
+.rule b{color:#ffb347}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.mini{background:var(--navy3);border-radius:9px;padding:10px 12px;font-size:12px;line-height:1.5;color:var(--muted)}
+.mini strong{color:#fff;display:block;margin-bottom:3px}
+.linkbox{font-size:12px;color:var(--muted);margin-top:8px}
 </style>
 </head>
 <body>
@@ -163,7 +188,7 @@ body{display:flex;flex-direction:column;align-items:center}
 <div class="logo">ASA</div>
 <div class="header-info">
 <div class="header-title">Fiche Pédagogique — Avatar Sales Academy</div>
-<div class="header-sub">Support formateur · Serious Game gamifié</div>
+<div class="header-sub">Support étudiant · Serious Game gamifié</div>
 </div>
 <div class="badge-off">Support pédagogique</div>
 </div>
@@ -171,66 +196,45 @@ body{display:flex;flex-direction:column;align-items:center}
 <div class="pole-icon">🧠</div>
 <div class="pole-info">
 <div class="pole-name">Fondamentaux &amp; Psychologie de Vente</div>
-<div class="pole-desc">Soft skills, SONCAS, DISC, objections et analyse comportementale commerciale</div>
+<div class="pole-desc">Soft skills, culture d'entreprise, biais de recrutement et décision collective</div>
 </div>
-<div class="pole-badge">Atelier Headhunter</div>
+<div class="pole-badge">Atelier HeadHunter</div>
 </div>
 <div class="content">
-<div class="meta-row">
-<span class="meta purple">🧠 Fondamentaux</span><span class="meta orange">⏱ 23 min</span>
-<span class="meta blue">🎯 Jeu d'équipe · Recrutement</span><span class="meta green">👥 Équipes 3-4</span>
-</div>
+<div class="meta-row"><span class="meta purple">🧠 Fondamentaux</span><span class="meta orange">⏱ 1 h 30</span><span class="meta blue">🎯 Jeu d'équipe · Recrutement</span><span class="meta green">👥 Équipes 3-5</span></div>
 <div class="tabs" id="tabs-main">
 <div class="tab active" onclick="st('scenario')">📖 Scénario</div>
 <div class="tab" onclick="st('objectifs')">🎯 Objectifs</div>
+<div class="tab" onclick="st('methode')">🧭 Méthode &amp; grille</div>
 </div>
 <div class="tab-panel active" id="main-scenario">
 <div class="section"><div class="sec-title">Résumé du scénario</div>
-<div class="card">Les apprenants sont recruteurs chez <strong>SPEED-UP</strong>, une startup en hyper-croissance (Série A levée, "chaos organisé"). L'équipe commerciale doit passer de 2 à 10 personnes en 3 mois. Le PDG change de stratégie chaque semaine. Pas de CRM structuré. Il faut "faire du chiffre" immédiatement.<br/><br/>Mission : analyser 4 dossiers de candidats au poste de Business Developer Senior (chasse pure), lire leurs dialogues d'entretien simulés, et désigner le profil le mieux adapté à cette culture startup chaos.</div>
-</div>
-<div class="section"><div class="sec-title">Contexte SPEED-UP</div>
-<div class="card"><strong style="color:var(--orange)">Entreprise :</strong> Startup, Série A, hyper-croissance · <strong style="color:var(--orange)">Culture :</strong> Chaos organisé, agilité, résultats immédiats · <strong style="color:var(--orange)">Poste :</strong> Business Developer Senior, chasse pure · <strong style="color:var(--orange)">Contrainte :</strong> 2→10 commerciaux en 3 mois, CRM vide, fiches produits non à jour</div>
-</div>
-<div class="section"><div class="sec-title">Les 4 profils candidats</div>
-<div class="profils-grid">
-<div class="profil-card">
+<div class="card">Vous êtes recruteurs pour <strong>SPEED-UP</strong>, une start-up B2B en hyper-croissance (série A levée, « chaos organisé »). L'équipe commerciale doit passer de 2 à 10 personnes en 3 mois. Le PDG change de stratégie chaque semaine, il n'y a pas de CRM structuré et il faut « faire du chiffre » immédiatement.<br/><br/>Mission : analyser 4 dossiers de candidats au poste de <strong>Business Developer Senior (chasse pure)</strong>, écouter leurs entretiens et choisir le profil le mieux adapté à cette culture.</div></div>
+<div class="section"><div class="sec-title">Ce que vous révèlent les entretiens</div>
+<div class="card"><strong style="color:var(--orange)">2 → 10</strong> commerciaux à recruter en 3 mois · <strong style="color:var(--orange)">0</strong> CRM structuré, fiche produit ou lead marketing · <strong style="color:var(--orange)">1 / sem.</strong> changement de stratégie du PDG (le mardi)<br/><br/>→ Base de données vide et marketing qui n'envoie pas assez de leads<br/>→ Produit avec des bugs, pas de plaquette, équipe technique en retard<br/>→ Deux juniors arrivent lundi et doivent monter en compétence<br/>→ Un concurrent lance son offre après-demain ; priorité : « faire du chiffre » tout de suite</div></div>
+<div class="section"><div class="sec-title">Les 4 candidats</div>
+<div class="profils-grid"><div class="profil-card">
 <div class="profil-nom">Ousmane</div>
-<div class="profil-surnom">"L'Architecte"</div>
-<div class="profil-cv">École Top 5 · 5 ans en grande banque</div>
-<div class="profil-trait">Veut documenter tout changement avant d'agir ("guide de 50 pages")</div>
-<div class="profil-trait">Refuse de prospecter sans CRM mis à jour</div>
-<div class="profil-trait">Stoppe une démo en cas de bug et attend correctif officiel</div>
-<div class="profil-trait">"La qualité prime sur la vitesse"</div>
-</div>
-<div class="profil-card">
+<div class="profil-surnom">CV 1</div>
+<div class="profil-cv">5 ans dans une grande banque</div>
+<div class="profil-trait">Veut documenter tout changement avant d'agir (« guide de 50 pages »)</div><div class="profil-trait">Met d'abord à jour le CRM et les scripts</div><div class="profil-trait">Stoppe une démo en cas de bug et attend le correctif</div>
+</div><div class="profil-card">
 <div class="profil-nom">Béatrice</div>
-<div class="profil-surnom">"La Pirate"</div>
-<div class="profil-cv">École Top 5 · 5 ans Freelance + Agence digitale</div>
-<div class="profil-trait">Scrape LinkedIn concurrents + cold mailing agressif dès J+1</div>
-<div class="profil-trait">Contourne le standard, note tout sur Excel perso</div>
-<div class="profil-trait">Assume le risque RGPD : "mieux vaut demander pardon"</div>
-<div class="profil-trait">"Mon équipe, c'est mes résultats" — intensité commerciale maximale</div>
-</div>
-<div class="profil-card">
+<div class="profil-surnom">CV 2</div>
+<div class="profil-cv">5 ans en freelance et agence digitale</div>
+<div class="profil-trait">Script Python et cold mailing dès la première semaine</div><div class="profil-trait">Contourne le standard, note tout sur un Excel perso</div><div class="profil-trait">« Mieux vaut demander pardon que la permission »</div>
+</div><div class="profil-card">
 <div class="profil-nom">Idriss</div>
-<div class="profil-surnom">"Le Médiateur"</div>
-<div class="profil-cv">École Top 5 · 5 ans ONG internationale</div>
-<div class="profil-trait">Priorité à la cohésion : déjeuners d'équipe, réunions de ressenti</div>
-<div class="profil-trait">Prêt à "ralentir la cadence" pour préserver l'équipe</div>
-<div class="profil-trait">Voudrait revoir les objectifs du PDG pour "réajuster les attentes"</div>
-<div class="profil-trait">"Une équipe heureuse est une équipe performante"</div>
-</div>
-<div class="profil-card">
+<div class="profil-surnom">CV 3</div>
+<div class="profil-cv">5 ans dans une ONG internationale</div>
+<div class="profil-trait">Priorité à la cohésion : déjeuners et réunions d'équipe</div><div class="profil-trait">Prêt à « ralentir la cadence » pour préserver l'équipe</div><div class="profil-trait">Veut réajuster les objectifs avec la direction</div>
+</div><div class="profil-card">
 <div class="profil-nom">Diane</div>
-<div class="profil-surnom">"La Chasseuse"</div>
-<div class="profil-cv">École Top 5 · 5 ans en vente de photocopieurs (one-shot)</div>
-<div class="profil-trait">Expérience de vente consultative produit complexe en cycle court</div>
-<div class="profil-trait">Habituée au terrain sans support marketing</div>
-<div class="profil-trait">Résultats chiffrés + autonomie + gestion de pipeline en solo</div>
-<div class="profil-trait">Adapte son discours selon les profils décisionnaires</div>
-</div>
-</div>
-</div>
+<div class="profil-surnom">CV 4</div>
+<div class="profil-cv">5 ans en vente one-shot de photocopieurs</div>
+<div class="profil-trait">Se fabrique sa plaquette et prospecte seule sur le terrain</div><div class="profil-trait">Méthode propre : sources publiques, contacts consentants</div><div class="profil-trait">Forme les juniors en rendez-vous, signatures sous 3 à 4 semaines</div>
+</div></div>
+<div class="linkbox">⚠️ Tous sortent d'une École de Commerce Top 5 avec 5 ans d'expérience. Le diplôme ne départage personne : seuls les comportements observés dans les entretiens comptent.</div></div>
 </div>
 <div class="tab-panel" id="main-objectifs">
 <div class="section"><div class="sec-title">Activité réalisée</div>
@@ -242,8 +246,23 @@ body{display:flex;flex-direction:column;align-items:center}
 <div class="obj-block"><div class="obj-block-title">Savoir-être (Adopter)</div><div class="obj-block-body">Adopter une posture d'évaluation objective basée sur les comportements, pas les diplômes. Démontrer sa capacité à défendre un point de vue face à des arguments contradictoires. Développer un sens critique face à des profils séduisants sur le papier mais inadaptés en pratique.<div class="verbs"><span class="verb">Adopter</span><span class="verb">Démontrer</span><span class="verb">Développer</span></div></div></div>
 </div>
 <div class="section"><div class="sec-title">Modalités pédagogiques</div>
-<div class="card"><strong style="color:var(--orange)">Format :</strong> Jeu d'équipe collaboratif — lecture dossiers + délibération + restitution orale<br/><br/><strong style="color:var(--orange)">Groupement :</strong> Équipes de 3-4 apprenants<br/><br/><strong style="color:var(--orange)">Durée totale :</strong> 23 min module + 15 min débriefing inter-équipes<br/><br/><strong style="color:var(--orange)">Évaluation :</strong> Qualité de l'argumentation + identification des signaux comportementaux + cohérence avec la culture startup<br/><br/><strong style="color:var(--orange)">Prérequis :</strong> Notions de base en recrutement et gestion commerciale</div>
+<div class="card"><strong style="color:var(--orange)">Format :</strong> Jeu d'équipe collaboratif — lecture dossiers + délibération + restitution orale<br/><br/><strong style="color:var(--orange)">Groupement :</strong> Équipes de 3 à 5 apprenants<br/><br/><strong style="color:var(--orange)">Durée totale :</strong> 1 h 30 (module, grille Excel, délibération, pitch et débrief : voir l'onglet Méthode)<br/><br/><strong style="color:var(--orange)">Évaluation :</strong> Qualité de l'argumentation + identification des signaux comportementaux + cohérence avec la culture startup<br/><br/><strong style="color:var(--orange)">Prérequis :</strong> Notions de base en recrutement et gestion commerciale</div>
 </div>
+</div>
+<div class="tab-panel" id="main-methode">
+<div class="section"><div class="sec-title">Le parcours en 6 étapes (1 h 30)</div><div class="stepper"><div class="stp"><div class="stp-n">1 · 10 min</div><div class="stp-t">S'approprier le contexte</div><div class="stp-d">Lire la fiche SPEED-UP et lister les contraintes du poste</div></div><div class="stp"><div class="stp-n">2 · 20 min</div><div class="stp-t">Écouter les entretiens</div><div class="stp-d">Suivre les 4 entretiens dans le module et noter les répliques clés</div></div><div class="stp"><div class="stp-n">3 · 15 min</div><div class="stp-t">Analyser et noter seul</div><div class="stp-d">Lire les 4 CV, puis noter chaque candidat dans la grille Excel</div></div><div class="stp"><div class="stp-n">4 · 20 min</div><div class="stp-t">Délibérer en équipe</div><div class="stp-d">Comparer les notes, débattre et fixer un choix commun</div></div><div class="stp"><div class="stp-n">5 · 15 min</div><div class="stp-t">Défendre son choix</div><div class="stp-d">Pitch de 3 min face aux autres équipes, puis questions</div></div><div class="stp"><div class="stp-n">6 · 10 min</div><div class="stp-t">Quiz et débrief</div><div class="stp-d">Faire le quiz du module et comparer avec le débrief</div></div></div></div>
+<div class="section"><div class="sec-title">La grille d'évaluation pondérée</div>
+<div class="card" style="margin-bottom:8px">Fichier à compléter : <strong style="color:var(--orange)">HEADHUNTER_grille_evaluation_ETUDIANT.xlsx</strong>, à renommer EQUIPE_&lt;nom&gt;.xlsx. Notez chaque candidat de 1 à 5 dans les cellules orange, justifiez chaque note en colonne G par un fait ou une réplique, puis saisissez votre choix et 3 arguments. Le score sur 100 et le classement se calculent seuls.</div>
+<table class="crit-table"><thead><tr><th>Critère</th><th style="text-align:center">Poids</th></tr></thead><tbody><tr><td><strong>Autonomie terrain</strong><span class="crit-sub">Prospecter sans CRM ni support marketing</span><div class="bar" style="width:75%"></div></td><td class="crit-w">25 %</td></tr><tr><td><strong>Intensité commerciale</strong><span class="crit-sub">Vitesse de mise en action dès J+1</span><div class="bar" style="width:75%"></div></td><td class="crit-w">25 %</td></tr><tr><td><strong>Adaptation au chaos</strong><span class="crit-sub">Stratégie changeante, bugs, concurrent</span><div class="bar" style="width:60%"></div></td><td class="crit-w">20 %</td></tr><tr><td><strong>Gestion du risque</strong><span class="crit-sub">RGPD, éthique, réputation</span><div class="bar" style="width:45%"></div></td><td class="crit-w">15 %</td></tr><tr><td><strong>Culture d'équipe</strong><span class="crit-sub">Montée en puissance de 2 à 10</span><div class="bar" style="width:45%"></div></td><td class="crit-w">15 %</td></tr></tbody></table>
+<div class="linkbox">Ils traduisent les contraintes de SPEED-UP : partir de zéro (autonomie), signer vite (intensité), suivre une stratégie mouvante (chaos), sans exposer l'entreprise (risque) et en doublant l'équipe (culture d'équipe).</div></div>
+<div class="section"><div class="sec-title">Barème</div>
+<div class="card"><strong style="color:var(--green)">5</strong> atout décisif · <strong style="color:var(--green)">4</strong> point fort · <strong>3</strong> neutre · <strong style="color:#ffb347">2</strong> signal d'alerte · <strong style="color:#ff6b6b">1</strong> inadapté</div>
+<div class="rule" style="margin-top:8px"><b>Deux réponses peuvent être défendables :</b> Selon la priorité de l'entreprise (vitesse ou sécurité), deux candidats peuvent l'emporter. Votre grille et vos arguments doivent dire clairement quelle priorité vous retenez et pourquoi elle correspond à SPEED-UP aujourd'hui.</div></div>
+<div class="section"><div class="sec-title">Trois pièges à éviter</div><div class="three"><div class="mini"><strong>Le biais du diplôme</strong>Tous sortent du même Top 5. Le prestige du CV ne prédit rien ici.</div><div class="mini"><strong>Le biais de la sécurité</strong>Un profil rassurant n'est pas forcément celui qu'exige l'urgence.</div><div class="mini"><strong>Le biais de la sympathie</strong>Un candidat agréable n'est pas forcément adapté à la vitesse exigée.</div></div>
+<div class="linkbox"><strong style="color:#fff">La bonne question n'est pas « Qui est le meilleur commercial ? » </strong>mais « Qui réussira chez SPEED-UP, dans ce contexte précis, dès demain ? »</div></div>
+<div class="section"><div class="sec-title">Vos livrables</div>
+<div class="card">→ La grille Excel d'équipe (20 notes justifiées, choix final, 3 arguments)<br/>→ Un pitch de 3 minutes : votre choix et pourquoi pas les 3 autres<br/>→ Bonus marque employeur : Une phrase d'accroche pour l'annonce du poste<br/><br/><strong style="color:var(--orange)">Un bon argument :</strong> un fait (qui dit quoi), ce qu'il révèle, et la contrainte SPEED-UP concernée.</div></div>
+<div class="section"><div class="sec-title">Pour aller plus loin : la marque employeur</div><div class="card" style="margin-bottom:8px">SPEED-UP doit encore recruter 8 commerciaux. Le candidat retenu sera le visage de l'équipe auprès des suivants.</div><div class="three"><div class="mini"><strong>Q1</strong>Quelles valeurs de SPEED-UP votre candidat incarne-t-il ?</div><div class="mini"><strong>Q2</strong>Comment rédiger l'annonce pour attirer ce profil et décourager les autres ?</div><div class="mini"><strong>Q3</strong>Comment parler aux candidats refusés pour qu'ils gardent une bonne image de l'entreprise ?</div></div></div>
 </div>
 </div>
 <div class="footer">Avatar Sales Academy</div>
