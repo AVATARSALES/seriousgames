@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Enquête RH — 3 Dossiers, 1 Priorité ! — Pôle Ressources Humaines · ASA</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0D1B35;--orange:#FF6B00;--blue:#00AAFF;--navy2:#1a2d52;--navy3:#0f2040;--light:#e8edf5;--muted:#8a9bb5;--green:#00cc88;}
+html,body{background:var(--navy);color:var(--light);font-family:'DM Sans',sans-serif;font-size:13.5px;min-height:100%}
+body{display:flex;flex-direction:column;align-items:center}
+.app{width:100%;max-width:920px;min-height:100vh;display:flex;flex-direction:column}
+.header{padding:13px 20px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.header-info{flex:1}
+.header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#fff}
+.header-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.badge-off{font-size:10px;background:rgba(0,204,136,0.1);color:var(--green);border:1px solid rgba(0,204,136,0.2);border-radius:20px;padding:3px 10px}
+.pole-header{padding:14px 20px;background:rgba(0,0,0,0.12);border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:14px}
+.pole-icon{font-size:26px}
+.pole-info{flex:1}
+.pole-name{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#fff}
+.pole-desc{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pole-badge{font-size:10px;background:rgba(0,170,255,0.12);color:var(--blue);border:1px solid rgba(0,170,255,0.2);border-radius:20px;padding:3px 10px}
+.mod-selector{padding:12px 18px 14px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.mod-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:9px}
+.mod-grid{display:flex;gap:10px;flex-wrap:wrap}
+.mod-btn{display:flex;align-items:center;gap:9px;padding:10px 16px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;flex:1;min-width:220px}
+.mod-btn:hover{border-color:rgba(255,107,0,0.4);color:var(--light);background:rgba(255,107,0,0.07)}
+.mod-btn.active{border-color:var(--orange);color:#fff;background:rgba(255,107,0,0.14)}
+.mod-btn-icon{font-size:18px}
+.mod-btn-info{display:flex;flex-direction:column;gap:2px}
+.mod-btn-title{font-size:12.5px;font-weight:500;line-height:1.3}
+.mod-btn-meta{font-size:10px;color:rgba(138,155,181,0.7);display:flex;gap:5px;align-items:center;flex-wrap:wrap}
+.tag-ok{background:rgba(0,204,136,0.1);color:var(--green);border:0.5px solid rgba(0,204,136,0.2);border-radius:4px;padding:1px 6px}
+.tag-dur{background:rgba(0,170,255,0.1);color:var(--blue);border:0.5px solid rgba(0,170,255,0.2);border-radius:4px;padding:1px 6px}
+.content{flex:1;padding:22px 20px 30px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.08) transparent}
+.content::-webkit-scrollbar{width:3px}
+.content::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;gap:14px;padding:40px}
+.welcome-icon{font-size:48px}
+.welcome-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:#fff}
+.welcome-desc{color:var(--muted);line-height:1.7;max-width:400px}
+.module-panel{display:none}
+.module-panel.active{display:block}
+.tabs{display:flex;gap:2px;margin-bottom:22px;border-bottom:1px solid rgba(255,255,255,0.07);flex-wrap:wrap}
+.tab{font-size:12.5px;padding:9px 16px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.tab:hover{color:var(--light)}
+.tab.active{color:#fff;border-bottom-color:var(--orange)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.meta-row{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.meta{font-size:11px;padding:4px 11px;border-radius:6px}
+.meta.blue{background:rgba(0,170,255,0.1);color:var(--blue);border:0.5px solid rgba(0,170,255,0.2)}
+.meta.orange{background:rgba(255,107,0,0.1);color:var(--orange);border:0.5px solid rgba(255,107,0,0.2)}
+.meta.green{background:rgba(0,204,136,0.1);color:var(--green);border:0.5px solid rgba(0,204,136,0.2)}
+.meta.purple{background:rgba(150,100,255,0.1);color:#bb99ff;border:0.5px solid rgba(150,100,255,0.2)}
+.meta.red{background:rgba(255,77,77,0.1);color:#ff9999;border:0.5px solid rgba(255,77,77,0.2)}
+.section{margin-bottom:22px}
+.sec-title{font-family:'Syne',sans-serif;font-weight:600;font-size:11.5px;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec-title::after{content:'';flex:1;height:1px;background:rgba(255,107,0,0.18)}
+.card{background:var(--navy2);border:0.5px solid rgba(255,255,255,0.07);border-radius:12px;padding:14px 16px;line-height:1.75;color:var(--light)}
+/* CLIENTS CARDS */
+.clients-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+@media(max-width:700px){.clients-grid{grid-template-columns:1fr}}
+.client-card{background:var(--navy3);border-radius:11px;padding:13px 14px;border-top:3px solid var(--orange);position:relative}
+.client-card.danger{border-top-color:#ff4d4d}
+.client-card.growth{border-top-color:var(--green)}
+.client-card.warning{border-top-color:#ffb347}
+.client-name{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.client-plan{font-size:10.5px;color:var(--orange);margin-bottom:8px}
+.client-kpi{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.kpi-row{display:flex;justify-content:space-between;font-size:11.5px}
+.kpi-label{color:var(--muted)}
+.kpi-val{font-weight:500;color:var(--light)}
+.kpi-val.bad{color:#ff9999}
+.kpi-val.good{color:var(--green)}
+.kpi-val.warn{color:#ffb347}
+.client-mission{font-size:11px;color:var(--muted);padding:6px 8px;background:rgba(255,255,255,0.04);border-radius:6px;line-height:1.5;border-left:2px solid rgba(255,107,0,0.3)}
+.priority-tag{position:absolute;top:10px;right:10px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px}
+.priority-tag.red{background:rgba(255,77,77,0.15);color:#ff9999;border:0.5px solid rgba(255,77,77,0.3)}
+.priority-tag.green{background:rgba(0,204,136,0.12);color:var(--green);border:0.5px solid rgba(0,204,136,0.25)}
+.priority-tag.amber{background:rgba(255,179,71,0.12);color:#ffb347;border:0.5px solid rgba(255,179,71,0.25)}
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:7px}
+.step{display:flex;gap:10px;background:var(--navy3);border-radius:9px;padding:10px 13px;align-items:flex-start}
+.step-n{font-size:10px;font-weight:600;color:var(--orange);background:rgba(255,107,0,0.1);border:0.5px solid rgba(255,107,0,0.2);border-radius:5px;padding:2px 7px;flex-shrink:0;margin-top:2px;white-space:nowrap}
+.step-body{flex:1;line-height:1.6;font-size:13px}
+.step-body strong{color:#fff}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+.b-ok{font-size:10.5px;color:var(--green);background:rgba(0,204,136,0.08);border:0.5px solid rgba(0,204,136,0.2);border-radius:5px;padding:2px 8px}
+.b-ko{font-size:10.5px;color:#ff6b6b;background:rgba(255,77,77,0.08);border:0.5px solid rgba(255,77,77,0.2);border-radius:5px;padding:2px 8px}
+/* OBJECTIONS */
+.obj-grid{display:flex;flex-direction:column;gap:8px}
+.obj-item{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--navy3);border-radius:10px;padding:11px 14px;align-items:flex-start}
+@media(max-width:580px){.obj-item{grid-template-columns:1fr}}
+.obj-left{}
+.obj-label{font-size:9px;font-weight:700;color:#ff9999;text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.obj-text{font-size:12.5px;color:#ff9999;line-height:1.5}
+.rep-label{font-size:9px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px}
+.rep-text{font-size:12.5px;color:var(--green);line-height:1.5}
+/* OBJECTIVES */
+.obj-block{background:var(--navy3);border-radius:10px;padding:13px 15px;margin-bottom:9px;border-left:3px solid var(--orange)}
+.obj-block-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--orange);margin-bottom:7px}
+.obj-block-body{color:var(--light);line-height:1.7}
+.verbs{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.verb{font-size:11px;padding:3px 10px;border-radius:6px;background:rgba(255,107,0,0.1);color:var(--orange);border:0.5px solid rgba(255,107,0,0.22)}
+/* QUIZ */
+.qcard{background:var(--navy2);border:0.5px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:10px}
+.qhead{padding:12px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:10px;transition:background .15s;user-select:none}
+.qhead:hover{background:rgba(255,255,255,0.025)}
+.qnum{min-width:26px;height:26px;border-radius:50%;background:var(--navy3);border:1px solid rgba(255,107,0,0.3);font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;color:var(--orange);flex-shrink:0;margin-top:1px}
+.qtype{font-size:9px;padding:2px 7px;border-radius:4px;background:rgba(0,170,255,0.1);color:var(--blue);border:0.5px solid rgba(0,170,255,0.2);flex-shrink:0;margin-top:3px;white-space:nowrap}
+.qtext{font-size:13px;color:var(--light);line-height:1.55;flex:1}
+.qarrow{color:var(--muted);font-size:11px;margin-top:4px;transition:transform .2s;flex-shrink:0}
+.qcard.open .qarrow{transform:rotate(90deg)}
+.qbody{display:none;padding:6px 16px 14px 52px;border-top:1px solid rgba(255,255,255,0.05)}
+.qcard.open .qbody{display:block}
+.ans{display:flex;align-items:flex-start;gap:7px;padding:4px 0;font-size:12.5px;line-height:1.5}
+.ans.ok{color:var(--green)}
+.ans.ko{color:rgba(138,155,181,0.6)}
+.ans .mark{font-weight:700;flex-shrink:0;width:14px}
+.expl{margin-top:8px;font-size:12px;color:var(--muted);padding:8px 11px;background:rgba(0,204,136,0.06);border-radius:7px;border-left:2px solid rgba(0,204,136,0.3);line-height:1.55}
+.match-table{width:100%;border-collapse:separate;border-spacing:0 5px;margin:6px 0}
+.match-table td{padding:6px 8px;font-size:12px;vertical-align:top;line-height:1.45}
+.col-err{background:rgba(255,77,77,0.07);border-radius:6px 0 0 6px;color:#ffaaaa;width:45%}
+.col-arrow{text-align:center;color:var(--muted);width:10%}
+.col-fix{background:rgba(0,204,136,0.07);border-radius:0 6px 6px 0;color:var(--green);width:45%}
+.class-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:8px 0}
+@media(max-width:600px){.class-cols{grid-template-columns:1fr}}
+.class-col{border-radius:8px;padding:9px 11px}
+.class-col.red{background:rgba(255,77,77,0.07);border:0.5px solid rgba(255,77,77,0.2)}
+.class-col.green{background:rgba(0,204,136,0.07);border:0.5px solid rgba(0,204,136,0.2)}
+.class-col.amber{background:rgba(255,179,71,0.07);border:0.5px solid rgba(255,179,71,0.2)}
+.class-col-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px}
+.class-col.red .class-col-title{color:#ff9999}
+.class-col.green .class-col-title{color:var(--green)}
+.class-col.amber .class-col-title{color:#ffb347}
+.class-item{font-size:11.5px;line-height:1.5;margin-bottom:4px;padding-left:12px;position:relative}
+.class-item::before{position:absolute;left:0;font-size:10px}
+.class-col.red .class-item::before{content:"✗";color:#ff9999}
+.class-col.green .class-item::before{content:"✓";color:var(--green)}
+.class-col.amber .class-item::before{content:"⚡";color:#ffb347}
+/* TIMELINE */
+.tl{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:12px}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:38px;flex-shrink:0}
+.tl-dot{width:30px;height:30px;border-radius:50%;background:var(--navy3);border:1.5px solid var(--orange);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--orange)}
+.tl-line{width:1px;flex:1;background:rgba(255,107,0,0.18);min-height:14px;margin:3px 0}
+.tl-item:last-child .tl-line{display:none}
+.tl-content{padding:2px 0 18px;flex:1}
+.tl-time{font-size:10px;color:var(--muted);margin-bottom:2px}
+.tl-title{font-size:13px;font-weight:500;color:#fff;margin-bottom:3px}
+.tl-desc{font-size:12px;color:var(--muted);line-height:1.55}
+.tip{display:flex;gap:10px;background:var(--navy3);border-radius:10px;padding:11px 14px;margin-bottom:8px;align-items:flex-start}
+.tip-icon{font-size:14px;flex-shrink:0;margin-top:2px}
+.tip-text{font-size:13px;color:var(--light);line-height:1.65}
+.tip-text strong{color:var(--orange)}
+.perso-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.perso{background:var(--navy3);border-radius:9px;padding:10px 14px;flex:1;min-width:160px}
+.perso-name{font-size:12px;font-weight:600;color:#fff;margin-bottom:2px}
+.perso-role{font-size:11px;color:var(--muted)}
+.soncas-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+@media(max-width:540px){.soncas-grid{grid-template-columns:1fr}}
+.soncas-item{background:var(--navy3);border-radius:9px;padding:10px 13px}
+.soncas-letter{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--orange);margin-bottom:3px}
+.soncas-mot{font-size:12px;font-weight:500;color:#fff;margin-bottom:2px}
+.soncas-desc{font-size:11.5px;color:var(--muted);line-height:1.5}
+.soncas-item.active{border:1px solid rgba(255,107,0,0.3)}
+.alert-box{display:flex;gap:10px;background:rgba(255,77,77,0.07);border:0.5px solid rgba(255,77,77,0.2);border-radius:10px;padding:11px 14px;margin-bottom:14px;align-items:flex-start}
+.alert-icon{font-size:16px;flex-shrink:0}
+.alert-text{font-size:12.5px;color:#ff9999;line-height:1.6}
+.alert-text strong{color:#ffaaaa}
+.footer{padding:6px 18px 10px;text-align:center;font-size:10px;color:rgba(138,155,181,0.4)}
+.class-cols .class-item{padding-left:0}.class-cols .class-item::before{content:none}
+.footer a{color:rgba(0,170,255,0.35);text-decoration:none}
+</style>
+
+<style>
+.col-a{background:rgba(0,170,255,0.07);border-radius:6px 0 0 6px;color:var(--blue);width:30%;font-weight:500}
+.col-b{background:rgba(0,204,136,0.07);border-radius:0 6px 6px 0;color:var(--green);width:60%}
+.clue{font-size:11px;color:#ffb347;padding:6px 8px;background:rgba(255,179,71,0.06);border-radius:6px;line-height:1.5;border-left:2px solid rgba(255,179,71,0.35);margin-top:6px}
+.footer{padding:6px 18px 10px;text-align:center;font-size:10px;color:rgba(138,155,181,0.4)}
+.class-cols .class-item{padding-left:0}.class-cols .class-item::before{content:none}
+</style>
+
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div class="logo">ASA</div>
+<div class="header-info">
+<div class="header-title">Fiche Pédagogique — Avatar Sales Academy</div>
+<div class="header-sub">Support apprenant · Serious Game gamifié</div>
+</div>
+<div class="badge-off">Support pédagogique</div>
+</div>
+<div class="pole-header">
+<div class="pole-icon">👥</div>
+<div class="pole-info">
+<div class="pole-name">Pôle Ressources Humaines — Recrutement &amp; Administration</div>
+<div class="pole-desc">Enquête RH en entreprise · Recrutement &amp; intégration · Contrats &amp; DPAE · Habilitations · Relations sociales · GEPP</div>
+</div>
+<div class="pole-badge">Enquête RH — 3 Dossiers, 1 Priorité !</div>
+</div>
+<div class="content" id="content"><div class="module-panel active" id="panel-rh">
+<div class="meta-row">
+<span class="meta orange">⏱ 10 min</span>
+<span class="meta blue">🔍 Enquête RH · 5 étapes</span>
+<span class="meta green">👥 Individuel</span>
+<span class="meta purple">🏭 Plateforme logistique</span>
+</div>
+<div class="tabs">
+<div class="tab active" onclick="switchTab('rh','scenario')">📖 Scénario</div>
+<div class="tab" onclick="switchTab('rh','objectifs')">🎯 Objectifs</div>
+</div>
+<div class="tab-panel active" id="rh-scenario">
+<div class="section"><div class="sec-title">Résumé du scénario</div>
+<div class="card">L'apprenant incarne un(e) <strong>assistant(e) RH alternant(e)</strong> chez <strong>Valmont Logistique</strong>, plateforme logistique de 340 salariés. Nous sommes lundi matin, en plein démarrage du pic d'activité de fin d'année. Julien, le chargé RH, est en formation toute la semaine : il a laissé 3 dossiers « à traiter » dans le SIRH. <strong>Nadia</strong>, la Responsable RH, est claire : « Clôture de la paie vendredi, je suis en comité de direction mardi et mercredi. Tu as 48 heures pour mener ton enquête et traiter <strong>un seul dossier à fond</strong> : contrat, formalités, planning, intégration. Choisis le bon. »</div>
+</div>
+<div class="section"><div class="sec-title">Personnages</div>
+<div class="perso-row">
+<div class="perso"><div class="perso-name">👩‍💼 Nadia</div><div class="perso-role">Responsable RH — briefing, puis feedback chiffré sur la décision finale</div></div>
+<div class="perso"><div class="perso-name">👷‍♀️ Léa Fontaine</div><div class="perso-role">Candidate cariste retenue — Bruno, le chef d'entrepôt, veut « un CDD, on verra »</div></div>
+<div class="perso"><div class="perso-name">🗂️ Sylvie Marchand</div><div class="perso-role">Secrétaire du CSE — attend le bilan social de l'année</div></div>
+<div class="perso"><div class="perso-name">📦 Inès Benali</div><div class="perso-role">Préparatrice de commandes — veut devenir cheffe d'équipe</div></div>
+</div>
+</div>
+<div class="section"><div class="sec-title">Les 3 dossiers à analyser (SIRH)</div>
+<div class="clients-grid">
+<div class="client-card danger">
+<span class="priority-tag red">🚨 Autre offre : mercredi</span>
+<div class="client-name">👷‍♀️ Léa Fontaine</div>
+<div class="client-plan">Recrutement · Cariste · Entrepôt</div>
+<div class="client-kpi">
+<div class="kpi-row"><span class="kpi-label">Poste</span><span class="kpi-val">Départ en retraite</span></div>
+<div class="kpi-row"><span class="kpi-label">Entretiens</span><span class="kpi-val good">2 faits · très favorables</span></div>
+<div class="kpi-row"><span class="kpi-label">CACES R489</span><span class="kpi-val bad">Expire dans 3 semaines</span></div>
+<div class="kpi-row"><span class="kpi-label">Contrat demandé</span><span class="kpi-val warn">CDD 6 mois</span></div>
+<div class="kpi-row"><span class="kpi-label">Prise de poste</span><span class="kpi-val">Lundi prochain</span></div>
+</div>
+<div class="client-mission">🎯 Bruno, chef d'entrepôt : « Fais-lui un CDD de 6 mois, on verra. » Le poste est celui de Gérard, cariste parti à la retraite. Léa a « une autre piste en cours ». Aucun document n'est encore parti.</div>
+</div>
+<div class="client-card warning">
+<span class="priority-tag amber">⏳ Réunion CSE : J-28</span>
+<div class="client-name">🗂️ Sylvie Marchand</div>
+<div class="client-plan">Relations sociales · Secrétaire du CSE</div>
+<div class="client-kpi">
+<div class="kpi-row"><span class="kpi-label">Effectif</span><span class="kpi-val">340 salariés</span></div>
+<div class="kpi-row"><span class="kpi-label">Document</span><span class="kpi-val good">Bilan social annuel</span></div>
+<div class="kpi-row"><span class="kpi-label">Thèmes sensibles</span><span class="kpi-val warn">Égalité H/F · accidents</span></div>
+<div class="kpi-row"><span class="kpi-label">Accidents avec arrêt</span><span class="kpi-val bad">9 cette année</span></div>
+<div class="kpi-row"><span class="kpi-label">Données SIRH</span><span class="kpi-val warn">À extraire et fiabiliser</span></div>
+</div>
+<div class="client-mission">🎯 Le plus gros dossier de l'année : le bilan social sera présenté au CSE dans 4 semaines. Les élus annoncent des questions « musclées » sur l'accidentologie.</div>
+</div>
+<div class="client-card growth">
+<span class="priority-tag green">📈 Talent motivé</span>
+<div class="client-name">📦 Inès Benali</div>
+<div class="client-plan">Mobilité interne · Préparatrice, 6 ans d'ancienneté</div>
+<div class="client-kpi">
+<div class="kpi-row"><span class="kpi-label">Souhait</span><span class="kpi-val good">Cheffe d'équipe</span></div>
+<div class="kpi-row"><span class="kpi-label">Demandes SIRH</span><span class="kpi-val good">3 demandes de formation</span></div>
+<div class="kpi-row"><span class="kpi-label">Formation visée</span><span class="kpi-val">Management de proximité</span></div>
+<div class="kpi-row"><span class="kpi-label">Frein</span><span class="kpi-val warn">Cours le soir</span></div>
+<div class="kpi-row"><span class="kpi-label">Entretien professionnel</span><span class="kpi-val">Décembre</span></div>
+</div>
+<div class="client-mission">🎯 Très appréciée de son équipe, relance par e-mail chaque semaine. Objection : « Je ne peux pas me former le soir, je récupère mes enfants. » Prochaine session de formation : mars.</div>
+</div>
+</div>
+</div>
+<div class="section"><div class="sec-title">Votre mission en 5 étapes</div>
+<div class="steps">
+<div class="step"><span class="step-n">Étape 1</span><div class="step-body"><strong>Briefing</strong> : écoutez Nadia, votre Responsable RH. Elle n'est joignable que lundi et jeudi, et la paie se clôture vendredi.</div></div>
+<div class="step"><span class="step-n">Étape 2</span><div class="step-body"><strong>Dossiers SIRH</strong> : analysez les 3 dossiers laissés par Julien. Repérez les indices : échéances, type de poste, habilitations, enjeux.</div></div>
+<div class="step"><span class="step-n">Étape 3</span><div class="step-body"><strong>Enquête</strong> : appelez chaque interlocuteur. À chaque fois, choisissez la question la plus pertinente parmi 3 pour obtenir l'information décisive.</div></div>
+<div class="step"><span class="step-n">Étape 4</span><div class="step-body"><strong>Solution RH</strong> : pour le dossier retenu, choisissez la réponse adaptée : quel contrat ? Quelles formalités ? Quelle habilitation ? Quel parcours d'intégration ?</div></div>
+<div class="step"><span class="step-n">Étape 5</span><div class="step-body"><strong>Décision finale</strong> : annoncez votre priorité des 48 h à Nadia et défendez-la. Son feedback est chiffré.</div></div>
+</div>
+<div class="clue">🔍 Indice : le dossier le plus gros n'est pas forcément le plus urgent, et ce que le manager demande n'est pas toujours ce dont l'entreprise a besoin.</div>
+</div>
+</div>
+<div class="tab-panel" id="rh-objectifs">
+<div class="section"><div class="sec-title">Activité réalisée par les apprenants</div>
+<div class="card">L'apprenant incarne un(e) assistant(e) RH alternant(e) qui reprend les dossiers d'un collègue absent. Il reçoit le briefing de Nadia, analyse les 3 dossiers SIRH (contrat, habilitations, échéances, indicateurs), interroge chaque interlocuteur en choisissant à chaque fois la question la plus pertinente parmi 3 (questions ouvertes, fermées, alternatives ou orientées), puis désigne la priorité des 48 h et la solution RH adaptée. Le feedback de Nadia valide ou invalide la décision avec un argument chiffré (coût d'un recrutement raté si mauvais choix).</div>
+</div>
+<div class="section"><div class="sec-title">Objectifs pédagogiques</div>
+<div class="obj-block"><div class="obj-block-title">Savoirs (Connaître)</div><div class="obj-block-body">Citer les formalités d'embauche : promesse d'embauche, contrat, DPAE, période d'essai. Expliquer dans quels cas un CDD est autorisé et pourquoi il ne peut pas pourvoir durablement un emploi permanent. Connaître les habilitations obligatoires d'un cariste (autorisation de conduite, CACES R489). Distinguer les types de questions (ouverte, fermée, alternative, orientée). Définir le bilan social, la BDESE et la GEPP.<div class="verbs"><span class="verb">Citer</span><span class="verb">Expliquer</span><span class="verb">Connaître</span><span class="verb">Distinguer</span><span class="verb">Définir</span></div></div></div>
+<div class="obj-block"><div class="obj-block-title">Savoir-faire (Appliquer)</div><div class="obj-block-body">Analyser un dossier SIRH pour repérer les indices d'urgence (échéance d'un candidat, habilitation qui expire, date de réunion). Hiérarchiser plusieurs dossiers selon l'urgence, le risque juridique et l'enjeu. Formuler une question ouverte qui fait émerger la vraie motivation d'un candidat. Proposer un contrat et un parcours d'intégration adaptés au besoin réel du poste. Traiter l'objection d'une salariée sur l'accès à la formation.<div class="verbs"><span class="verb">Analyser</span><span class="verb">Hiérarchiser</span><span class="verb">Formuler</span><span class="verb">Proposer</span><span class="verb">Traiter</span></div></div></div>
+<div class="obj-block"><div class="obj-block-title">Savoir-être (Adopter)</div><div class="obj-block-body">Adopter une posture d'enquêteur : chercher l'information décisive avant d'agir. Résister à l'attrait du « gros dossier » quand l'urgence est ailleurs. Conseiller un manager dans l'intérêt de l'entreprise plutôt qu'exécuter sa demande. Prendre une décision argumentée et la défendre devant sa Responsable RH.<div class="verbs"><span class="verb">Adopter</span><span class="verb">Résister</span><span class="verb">Conseiller</span><span class="verb">Prendre</span></div></div></div>
+</div>
+<div class="section"><div class="sec-title">Modalités pédagogiques</div>
+<div class="card"><strong style="color:var(--orange)">Format :</strong> Serious Game d'investigation : analyse de 3 dossiers SIRH + 3 dialogues à choix (types de questions) + décision argumentée (priorité + solution RH)<br/><br/><strong style="color:var(--orange)">Groupement :</strong> Individuel (enquête et décision), débriefing collectif, jeu de rôle en binôme<br/><br/><strong style="color:var(--orange)">Durée totale :</strong> 10 min module + 20 min débriefing et jeu de rôle<br/><br/><strong style="color:var(--orange)">Évaluation :</strong> Qualité de la priorisation + conformité de la solution (contrat, DPAE, habilitation) + argumentation face à Nadia + grille du jeu de rôle<br/><br/><strong style="color:var(--orange)">Prérequis :</strong> Notions de base sur le contrat de travail. CDD, DPAE, BDESE et GEPP sont rappelés dans le quiz.<br/><br/><strong style="color:var(--orange)">Niveaux :</strong> BTS SAM / GPME (administration du personnel, recrutement) · BUT GEA parcours GPRH (pilotage social, bilan social) · Licence Pro Métiers de la GRH (GEPP, marque employeur)</div>
+</div>
+</div>
+</div></div>
+<div class="footer">Avatar Sales Academy</div>
+</div>
+<script>
+function switchTab(mod, tab) {
+const panel = document.getElementById('panel-'+mod);
+if(!panel) return;
+panel.querySelectorAll('.tab').forEach(t => {
+t.classList.toggle('active', t.getAttribute('onclick') && t.getAttribute('onclick').includes("'"+tab+"'"));
+});
+panel.querySelectorAll('.tab-panel').forEach(p => {
+p.classList.toggle('active', p.id === mod+'-'+tab);
+});
+}
+</script>
+</body>
+</html>
