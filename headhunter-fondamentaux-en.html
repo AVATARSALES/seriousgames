@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HeadHunter Workshop — Student handout · ASA</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0D1B35;--orange:#FF6B00;--blue:#00AAFF;--navy2:#1a2d52;--navy3:#0f2040;--light:#e8edf5;--muted:#8a9bb5;--green:#00cc88;}
+html,body{background:var(--navy);color:var(--light);font-family:'DM Sans',sans-serif;font-size:13.5px;min-height:100%}
+body{display:flex;flex-direction:column;align-items:center}
+.app{width:100%;max-width:940px;min-height:100vh;display:flex;flex-direction:column}
+.header{padding:13px 20px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;gap:12px}
+.logo{width:40px;height:40px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#fff;flex-shrink:0}
+.header-info{flex:1}.header-title{font-family:'Syne',sans-serif;font-weight:700;font-size:15px;color:#fff}
+.header-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.badge-off{font-size:10px;background:rgba(0,204,136,0.1);color:var(--green);border:1px solid rgba(0,204,136,0.2);border-radius:20px;padding:3px 10px}
+.pole-header{padding:14px 20px;background:rgba(0,0,0,0.12);border-bottom:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:14px}
+.pole-icon{font-size:26px}.pole-info{flex:1}
+.pole-name{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:#fff}
+.pole-desc{font-size:11.5px;color:var(--muted);margin-top:2px}
+.pole-badge{font-size:10px;background:rgba(0,170,255,0.12);color:var(--blue);border:1px solid rgba(0,170,255,0.2);border-radius:20px;padding:3px 10px}
+.mod-selector{padding:11px 18px 13px;border-bottom:1px solid rgba(255,255,255,0.05)}
+.mod-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+.mod-grid{display:flex;gap:7px;flex-wrap:wrap}
+.mod-btn{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03);color:var(--muted);transition:all .15s;font-family:'DM Sans',sans-serif;flex:1;min-width:200px}
+.mod-btn:hover{border-color:rgba(255,107,0,0.4);color:var(--light);background:rgba(255,107,0,0.07)}
+.mod-btn.active{border-color:var(--orange);color:#fff;background:rgba(255,107,0,0.14)}
+.mod-btn-icon{font-size:16px}
+.mod-btn-info{display:flex;flex-direction:column;gap:1px}
+.mod-btn-title{font-size:12px;font-weight:500;line-height:1.25}
+.mod-btn-meta{font-size:10px;color:rgba(138,155,181,0.65);display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.tag-ok{background:rgba(0,204,136,0.1);color:var(--green);border:0.5px solid rgba(0,204,136,0.2);border-radius:4px;padding:1px 5px;font-size:9px}
+.tag-dur{background:rgba(0,170,255,0.1);color:var(--blue);border:0.5px solid rgba(0,170,255,0.2);border-radius:4px;padding:1px 5px;font-size:9px}
+.content{flex:1;padding:20px 18px 30px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,0.08) transparent}
+.content::-webkit-scrollbar{width:3px}
+.content::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.1);border-radius:2px}
+.welcome{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;text-align:center;gap:12px;padding:40px}
+.welcome-icon{font-size:48px}
+.welcome-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:#fff}
+.welcome-desc{color:var(--muted);line-height:1.7;max-width:420px}
+.module-panel{display:none}.module-panel.active{display:block}
+.tabs{display:flex;gap:2px;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.07);flex-wrap:wrap}
+.tab{font-size:12.5px;padding:8px 15px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap}
+.tab:hover{color:var(--light)}.tab.active{color:#fff;border-bottom-color:var(--orange)}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.meta-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.meta{font-size:11px;padding:4px 10px;border-radius:6px}
+.meta.blue{background:rgba(0,170,255,0.1);color:var(--blue);border:0.5px solid rgba(0,170,255,0.2)}
+.meta.orange{background:rgba(255,107,0,0.1);color:var(--orange);border:0.5px solid rgba(255,107,0,0.2)}
+.meta.green{background:rgba(0,204,136,0.1);color:var(--green);border:0.5px solid rgba(0,204,136,0.2)}
+.meta.purple{background:rgba(150,100,255,0.1);color:#bb99ff;border:0.5px solid rgba(150,100,255,0.2)}
+.meta.red{background:rgba(255,77,77,0.1);color:#ff9999;border:0.5px solid rgba(255,77,77,0.2)}
+.section{margin-bottom:20px}
+.sec-title{font-family:'Syne',sans-serif;font-weight:600;font-size:11px;color:var(--orange);text-transform:uppercase;letter-spacing:.6px;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.sec-title::after{content:'';flex:1;height:1px;background:rgba(255,107,0,0.18)}
+.card{background:var(--navy2);border:0.5px solid rgba(255,255,255,0.07);border-radius:12px;padding:13px 15px;line-height:1.75;color:var(--light)}
+.desc-card{background:var(--navy3);border-radius:10px;padding:12px 14px;border-left:4px solid var(--orange);margin-bottom:12px;font-size:13px;line-height:1.65}
+.steps{display:flex;flex-direction:column;gap:6px}
+.step{display:flex;gap:9px;background:var(--navy3);border-radius:9px;padding:9px 12px;align-items:flex-start}
+.step-n{font-size:10px;font-weight:600;color:var(--orange);background:rgba(255,107,0,0.1);border:0.5px solid rgba(255,107,0,0.2);border-radius:5px;padding:2px 6px;flex-shrink:0;margin-top:2px;white-space:nowrap;min-width:72px;text-align:center}
+.step-body{flex:1;line-height:1.6;font-size:13px}.step-body strong{color:#fff}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}
+.b-ok{font-size:10.5px;color:var(--green);background:rgba(0,204,136,0.08);border:0.5px solid rgba(0,204,136,0.2);border-radius:5px;padding:2px 7px}
+.b-ko{font-size:10.5px;color:#ff6b6b;background:rgba(255,77,77,0.08);border:0.5px solid rgba(255,77,77,0.2);border-radius:5px;padding:2px 7px}
+.fins-grid{display:flex;flex-direction:column;gap:7px}
+.fin{display:flex;gap:9px;align-items:flex-start;border-radius:10px;padding:11px 13px}
+.fin.ok{background:rgba(0,204,136,0.07);border:0.5px solid rgba(0,204,136,0.2)}
+.fin.med{background:rgba(255,179,71,0.07);border:0.5px solid rgba(255,179,71,0.2)}
+.fin.ko{background:rgba(255,77,77,0.07);border:0.5px solid rgba(255,77,77,0.2)}
+.fin-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+.fin-title{font-size:13px;font-weight:600;margin-bottom:2px}
+.fin.ok .fin-title{color:var(--green)}.fin.med .fin-title{color:#ffb347}.fin.ko .fin-title{color:#ff9999}
+.fin-text{font-size:12px;line-height:1.55;color:var(--light)}
+.desc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+@media(max-width:580px){.desc-grid{grid-template-columns:1fr}}
+.desc-item{background:var(--navy3);border-radius:9px;padding:11px 13px;border-left:3px solid var(--orange)}
+.desc-item-num{font-size:9px;font-weight:700;color:var(--orange);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.desc-item-title{font-size:13px;font-weight:500;color:#fff;margin-bottom:4px}
+.desc-item-text{font-size:12px;color:var(--muted);line-height:1.5;margin-bottom:5px}
+.desc-item-ex{font-size:11.5px;color:var(--green);padding:4px 7px;background:rgba(0,204,136,0.07);border-radius:5px;border-left:2px solid rgba(0,204,136,0.3);line-height:1.5}
+.obj-block{background:var(--navy3);border-radius:10px;padding:12px 14px;margin-bottom:8px;border-left:3px solid var(--orange)}
+.obj-block-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--orange);margin-bottom:6px}
+.obj-block-body{color:var(--light);line-height:1.7}
+.verbs{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.verb{font-size:11px;padding:3px 9px;border-radius:6px;background:rgba(255,107,0,0.1);color:var(--orange);border:0.5px solid rgba(255,107,0,0.22)}
+.qcard{background:var(--navy2);border:0.5px solid rgba(255,255,255,0.07);border-radius:12px;overflow:hidden;margin-bottom:9px}
+.qhead{padding:11px 15px;cursor:pointer;display:flex;align-items:flex-start;gap:9px;transition:background .15s;user-select:none}
+.qhead:hover{background:rgba(255,255,255,0.02)}
+.qnum{min-width:25px;height:25px;border-radius:50%;background:var(--navy3);border:1px solid rgba(255,107,0,0.3);font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;color:var(--orange);flex-shrink:0;margin-top:1px}
+.qtype{font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(0,170,255,0.1);color:var(--blue);border:0.5px solid rgba(0,170,255,0.2);flex-shrink:0;margin-top:3px;white-space:nowrap}
+.qtext{font-size:13px;color:var(--light);line-height:1.55;flex:1}
+.qarrow{color:var(--muted);font-size:11px;margin-top:4px;transition:transform .2s;flex-shrink:0}
+.qcard.open .qarrow{transform:rotate(90deg)}
+.qbody{display:none;padding:5px 15px 13px 49px;border-top:1px solid rgba(255,255,255,0.05)}
+.qcard.open .qbody{display:block}
+.ans{display:flex;align-items:flex-start;gap:6px;padding:3px 0;font-size:12.5px;line-height:1.5}
+.ans.ok{color:var(--green)}.ans.ko{color:rgba(138,155,181,0.6)}
+.ans .mark{font-weight:700;flex-shrink:0;width:14px}
+.expl{margin-top:7px;font-size:12px;color:var(--muted);padding:7px 10px;background:rgba(0,204,136,0.06);border-radius:7px;border-left:2px solid rgba(0,204,136,0.3);line-height:1.55}
+.match-table{width:100%;border-collapse:separate;border-spacing:0 4px;margin:5px 0}
+.match-table td{padding:6px 8px;font-size:12px;vertical-align:top;line-height:1.4}
+.col-a{background:rgba(255,77,77,0.07);border-radius:6px 0 0 6px;color:#ffaaaa;width:40%}
+.col-arrow{text-align:center;color:var(--muted);width:10%}
+.col-b{background:rgba(0,204,136,0.07);border-radius:0 6px 6px 0;color:var(--green);width:50%}
+.class-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin:7px 0}
+@media(max-width:600px){.class-cols{grid-template-columns:1fr}}
+.class-col{border-radius:8px;padding:8px 11px}
+.class-col.red{background:rgba(255,77,77,0.07);border:0.5px solid rgba(255,77,77,0.2)}
+.class-col.green{background:rgba(0,204,136,0.07);border:0.5px solid rgba(0,204,136,0.2)}
+.class-col.amber{background:rgba(255,179,71,0.07);border:0.5px solid rgba(255,179,71,0.2)}
+.class-col-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+.class-col.red .class-col-title{color:#ff9999}.class-col.green .class-col-title{color:var(--green)}.class-col.amber .class-col-title{color:#ffb347}
+.class-item{font-size:11px;line-height:1.5;margin-bottom:3px;padding-left:11px;position:relative}
+.class-item::before{position:absolute;left:0;font-size:10px}
+.class-col.red .class-item::before{content:"✗";color:#ff9999}
+.class-col.green .class-item::before{content:"✓";color:var(--green)}
+.class-col.amber .class-item::before{content:"⚡";color:#ffb347}
+.tl{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:11px}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0}
+.tl-dot{width:28px;height:28px;border-radius:50%;background:var(--navy3);border:1.5px solid var(--orange);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--orange)}
+.tl-line{width:1px;flex:1;background:rgba(255,107,0,0.18);min-height:12px;margin:3px 0}
+.tl-item:last-child .tl-line{display:none}
+.tl-content{padding:2px 0 15px;flex:1}
+.tl-time{font-size:10px;color:var(--muted);margin-bottom:2px}
+.tl-title{font-size:13px;font-weight:500;color:#fff;margin-bottom:2px}
+.tl-desc{font-size:12px;color:var(--muted);line-height:1.55}
+.tip{display:flex;gap:9px;background:var(--navy3);border-radius:10px;padding:10px 13px;margin-bottom:7px;align-items:flex-start}
+.tip-icon{font-size:13px;flex-shrink:0;margin-top:2px}
+.tip-text{font-size:13px;color:var(--light);line-height:1.65}
+.tip-text strong{color:var(--orange)}
+.panier-box{display:flex;align-items:center;justify-content:space-between;background:var(--navy3);border-radius:10px;padding:12px 16px;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.panier-item{text-align:center}
+.panier-val{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;color:var(--orange)}
+.panier-label{font-size:10px;color:var(--muted);margin-top:2px}
+.panier-plus{font-size:18px;color:var(--muted)}
+.panier-total{background:rgba(255,107,0,0.1);border:0.5px solid rgba(255,107,0,0.25);border-radius:8px;padding:8px 14px;text-align:center}
+.panier-total .panier-val{color:#fff}
+.desc-method{background:var(--navy3);border-radius:10px;padding:12px 14px;margin-bottom:12px}
+.desc-method-title{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.desc-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:5px}
+.desc-letter{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;color:var(--blue);min-width:24px;flex-shrink:0}
+.desc-content{font-size:13px;line-height:1.55}
+.desc-content strong{color:#fff}
+.merch-concept{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:12px}
+@media(max-width:560px){.merch-concept{grid-template-columns:1fr}}
+.merch-item{background:var(--navy3);border-radius:9px;padding:10px 12px;border-top:2px solid var(--orange)}
+.merch-term{font-size:12px;font-weight:600;color:var(--orange);margin-bottom:3px}
+.merch-def{font-size:12px;color:var(--muted);line-height:1.5}
+.merch-ex{font-size:11.5px;color:var(--green);margin-top:5px;padding:4px 7px;background:rgba(0,204,136,0.07);border-radius:5px}
+.footer{padding:6px 18px 10px;text-align:center;font-size:10px;color:rgba(138,155,181,0.4)}
+.footer a{color:rgba(0,170,255,0.35);text-decoration:none}
+
+.module-panel{display:block!important}
+
+.profils-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.profil-card{background:var(--navy3);border-radius:11px;padding:13px 14px;border-top:3px solid var(--orange);position:relative}
+.profil-nom{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.profil-surnom{font-size:10px;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:.4px;margin-bottom:7px}
+.profil-cv{font-size:11.5px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.profil-trait{font-size:12px;line-height:1.55;color:var(--light);margin-bottom:4px;padding-left:12px;position:relative}
+.profil-trait::before{content:"→";position:absolute;left:0;color:var(--orange);font-size:10px}
+.crit-table{width:100%;border-collapse:collapse;font-size:12.5px}
+.crit-table th{text-align:left;padding:8px 10px;color:var(--orange);border-bottom:2px solid var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
+.crit-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top}
+.crit-w{color:#ffb347;font-weight:700;text-align:center;white-space:nowrap}
+.crit-sub{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.bar{height:6px;border-radius:3px;background:var(--orange);margin-top:6px}
+.stepper{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}
+.stp{background:var(--navy3);border-radius:10px;padding:10px 12px}
+.stp-n{font-family:'Syne',sans-serif;font-weight:700;color:var(--orange);font-size:12px}
+.stp-t{font-weight:600;color:#fff;font-size:12.5px;margin:3px 0}
+.stp-d{font-size:11.5px;color:var(--muted);line-height:1.45}
+.rule{background:rgba(255,179,71,0.07);border:1px solid rgba(255,179,71,0.3);border-radius:10px;padding:11px 14px;font-size:12.5px;line-height:1.6}
+.rule b{color:#ffb347}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.mini{background:var(--navy3);border-radius:9px;padding:10px 12px;font-size:12px;line-height:1.5;color:var(--muted)}
+.mini strong{color:#fff;display:block;margin-bottom:3px}
+.linkbox{font-size:12px;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="header">
+<div class="logo">ASA</div>
+<div class="header-info">
+<div class="header-title">Learning Sheet — Avatar Sales Academy</div>
+<div class="header-sub">Student handout · Gamified Serious Game</div>
+</div>
+<div class="badge-off">Learning material</div>
+</div>
+<div class="pole-header">
+<div class="pole-icon">🧠</div>
+<div class="pole-info">
+<div class="pole-name">Sales Fundamentals &amp; Psychology</div>
+<div class="pole-desc">Soft skills, company culture, recruitment bias and group decision-making</div>
+</div>
+<div class="pole-badge">HeadHunter Workshop</div>
+</div>
+<div class="content">
+<div class="meta-row"><span class="meta purple">🧠 Fundamentals</span><span class="meta orange">⏱ 1 h 30</span><span class="meta blue">🎯 Team game · Recruitment</span><span class="meta green">👥 Teams of 3-5</span></div>
+<div class="tabs" id="tabs-main">
+<div class="tab active" onclick="st('scenario')">📖 Scenario</div>
+<div class="tab" onclick="st('objectifs')">🎯 Objectives</div>
+<div class="tab" onclick="st('methode')">🧭 Method &amp; grid</div>
+</div>
+<div class="tab-panel active" id="main-scenario">
+<div class="section"><div class="sec-title">Scenario summary</div>
+<div class="card">You are recruiters for <strong>SPEED-UP</strong>, a hyper-growth B2B start-up (Series A raised, “organised chaos”). The sales team must grow from 2 to 10 people in 3 months. The CEO changes strategy every week, there is no structured CRM, and the team has to “bring in revenue” immediately.<br/><br/>Mission: review 4 candidate files for the <strong>Senior Business Developer (pure hunting)</strong> position, listen to their interviews and choose the profile best suited to this culture.</div></div>
+<div class="section"><div class="sec-title">What the interviews reveal</div>
+<div class="card"><strong style="color:var(--orange)">2 → 10</strong> sales reps to hire in 3 months · <strong style="color:var(--orange)">0</strong> structured CRM, product sheet or marketing leads · <strong style="color:var(--orange)">1 / week</strong> CEO strategy change (on Tuesdays)<br/><br/>→ Empty database and marketing not sending enough leads<br/>→ Buggy product, no brochure, tech team running late<br/>→ Two juniors start on Monday and need to ramp up<br/>→ A competitor launches its offer the day after tomorrow; priority: “bring in revenue” right now</div></div>
+<div class="section"><div class="sec-title">The 4 candidates</div>
+<div class="profils-grid"><div class="profil-card">
+<div class="profil-nom">Ousmane</div>
+<div class="profil-surnom">CV 1</div>
+<div class="profil-cv">5 years at a major bank</div>
+<div class="profil-trait">Wants to document every change before acting (“a 50-page guide”)</div><div class="profil-trait">First updates the CRM and the scripts</div><div class="profil-trait">Stops a demo when a bug appears and waits for the fix</div>
+</div><div class="profil-card">
+<div class="profil-nom">Béatrice</div>
+<div class="profil-surnom">CV 2</div>
+<div class="profil-cv">5 years freelancing and in a digital agency</div>
+<div class="profil-trait">Python script and cold mailing from week one</div><div class="profil-trait">Bypasses the switchboard, logs everything in a personal Excel file</div><div class="profil-trait">“Better to ask for forgiveness than permission”</div>
+</div><div class="profil-card">
+<div class="profil-nom">Idriss</div>
+<div class="profil-surnom">CV 3</div>
+<div class="profil-cv">5 years at an international NGO</div>
+<div class="profil-trait">Cohesion first: team lunches and team meetings</div><div class="profil-trait">Ready to “slow down the pace” to protect the team</div><div class="profil-trait">Wants to readjust targets with management</div>
+</div><div class="profil-card">
+<div class="profil-nom">Diane</div>
+<div class="profil-surnom">CV 4</div>
+<div class="profil-cv">5 years in one-shot photocopier sales</div>
+<div class="profil-trait">Builds her own brochure and prospects alone in the field</div><div class="profil-trait">Clean method: public sources, consenting contacts</div><div class="profil-trait">Trains juniors during meetings, deals signed within 3 to 4 weeks</div>
+</div></div>
+<div class="linkbox">⚠️ All of them graduated from a Top 5 Business School and have 5 years of experience. The degree does not set anyone apart: only the behaviours observed in the interviews count.</div></div>
+</div>
+<div class="tab-panel" id="main-objectifs">
+<div class="section"><div class="sec-title">Activity</div>
+<div class="card">In teams of 3-4, learners read the 4 application files (CV + simulated interview dialogues), analyse each candidate's behaviours and soft skills in concrete situations (chaos, product bug, team conflict), then deliberate and defend their choice in front of the other teams. The trainer leads a comparative debrief on the soft skills expected in a hyper-growth start-up.</div>
+</div>
+<div class="section"><div class="sec-title">Learning objectives</div>
+<div class="obj-block"><div class="obj-block-title">Knowledge (Know)</div><div class="obj-block-body">Define the key soft skills of a Business Developer in a start-up context (agility, resilience, autonomy, hunter mindset). Distinguish the 4 behavioural archetypes (architect, pirate, mediator, hunter) and their strengths/risks in a sales context.<div class="verbs"><span class="verb">Define</span><span class="verb">Distinguish</span></div></div></div>
+<div class="obj-block"><div class="obj-block-title">Skills (Apply)</div><div class="obj-block-body">Analyse a candidate profile based on real behavioural dialogues. Assess the fit between a profile and a specific company culture. Argue a hiring decision with examples taken from the file. Identify the warning signs of an unsuitable candidate (rigidity, legal risk, avoiding targets).<div class="verbs"><span class="verb">Analyse</span><span class="verb">Assess</span><span class="verb">Argue</span><span class="verb">Identify</span></div></div></div>
+<div class="obj-block"><div class="obj-block-title">Attitudes (Adopt)</div><div class="obj-block-body">Adopt an objective assessment stance based on behaviours, not degrees. Demonstrate the ability to defend a point of view against opposing arguments. Develop critical thinking towards profiles that look appealing on paper but are unsuitable in practice.<div class="verbs"><span class="verb">Adopt</span><span class="verb">Demonstrate</span><span class="verb">Develop</span></div></div></div>
+</div>
+<div class="section"><div class="sec-title">Teaching format</div>
+<div class="card"><strong style="color:var(--orange)">Format:</strong> Collaborative team game — file reading + deliberation + oral presentation<br/><br/><strong style="color:var(--orange)">Grouping:</strong> Teams of 3 to 5 learners<br/><br/><strong style="color:var(--orange)">Total duration:</strong> 1 h 30 (module, Excel grid, deliberation, pitch and debrief: see the Method tab)<br/><br/><strong style="color:var(--orange)">Assessment:</strong> Quality of argumentation + identification of behavioural signals + consistency with the start-up culture<br/><br/><strong style="color:var(--orange)">Prerequisites:</strong> Basic knowledge of recruitment and sales management</div>
+</div>
+</div>
+<div class="tab-panel" id="main-methode">
+<div class="section"><div class="sec-title">The 6-step journey (1 h 30)</div><div class="stepper"><div class="stp"><div class="stp-n">1 · 10 min</div><div class="stp-t">Get to grips with the context</div><div class="stp-d">Read the SPEED-UP sheet and list the constraints of the position</div></div><div class="stp"><div class="stp-n">2 · 20 min</div><div class="stp-t">Listen to the interviews</div><div class="stp-d">Follow the 4 interviews in the module and note the key lines</div></div><div class="stp"><div class="stp-n">3 · 15 min</div><div class="stp-t">Analyse and score alone</div><div class="stp-d">Read the 4 CVs, then score each candidate in the Excel grid</div></div><div class="stp"><div class="stp-n">4 · 20 min</div><div class="stp-t">Deliberate as a team</div><div class="stp-d">Compare scores, debate and agree on a common choice</div></div><div class="stp"><div class="stp-n">5 · 15 min</div><div class="stp-t">Defend your choice</div><div class="stp-d">3-minute pitch to the other teams, then questions</div></div><div class="stp"><div class="stp-n">6 · 10 min</div><div class="stp-t">Quiz and debrief</div><div class="stp-d">Take the module quiz and compare with the debrief</div></div></div></div>
+<div class="section"><div class="sec-title">The weighted evaluation grid</div>
+<div class="card" style="margin-bottom:8px">File to complete: <strong style="color:var(--orange)">HEADHUNTER_grille_evaluation_ETUDIANT.xlsx</strong>, to be renamed EQUIPE_&lt;name&gt;.xlsx. Score each candidate from 1 to 5 in the orange cells, justify each score in column G with a fact or a quote, then enter your choice and 3 arguments. The score out of 100 and the ranking are calculated automatically.</div>
+<table class="crit-table"><thead><tr><th>Criterion</th><th style="text-align:center">Weight</th></tr></thead><tbody><tr><td><strong>Field autonomy</strong><span class="crit-sub">Prospect without a CRM or marketing support</span><div class="bar" style="width:75%"></div></td><td class="crit-w">25 %</td></tr><tr><td><strong>Sales intensity</strong><span class="crit-sub">Speed of getting into action from D+1</span><div class="bar" style="width:75%"></div></td><td class="crit-w">25 %</td></tr><tr><td><strong>Adapting to chaos</strong><span class="crit-sub">Shifting strategy, bugs, competitor</span><div class="bar" style="width:60%"></div></td><td class="crit-w">20 %</td></tr><tr><td><strong>Risk management</strong><span class="crit-sub">GDPR, ethics, reputation</span><div class="bar" style="width:45%"></div></td><td class="crit-w">15 %</td></tr><tr><td><strong>Team culture</strong><span class="crit-sub">Scaling up from 2 to 10</span><div class="bar" style="width:45%"></div></td><td class="crit-w">15 %</td></tr></tbody></table>
+<div class="linkbox">They reflect SPEED-UP's constraints: starting from scratch (autonomy), signing fast (intensity), following a moving strategy (chaos), without exposing the company (risk) and while growing the team fivefold (team culture).</div></div>
+<div class="section"><div class="sec-title">Scoring scale</div>
+<div class="card"><strong style="color:var(--green)">5</strong> decisive asset · <strong style="color:var(--green)">4</strong> strength · <strong>3</strong> neutral · <strong style="color:#ffb347">2</strong> warning sign · <strong style="color:#ff6b6b">1</strong> unsuitable</div>
+<div class="rule" style="margin-top:8px"><b>Two answers can be defended:</b> Depending on the company's priority (speed or safety), two candidates can come out on top. Your grid and your arguments must state clearly which priority you choose and why it fits SPEED-UP today.</div></div>
+<div class="section"><div class="sec-title">Three traps to avoid</div><div class="three"><div class="mini"><strong>The degree bias</strong>They all come from the same Top 5 school. The prestige of the CV predicts nothing here.</div><div class="mini"><strong>The safety bias</strong>A reassuring profile is not necessarily the one the emergency calls for.</div><div class="mini"><strong>The likeability bias</strong>A pleasant candidate is not necessarily suited to the speed required.</div></div>
+<div class="linkbox"><strong style="color:#fff">The right question is not “Who is the best salesperson?” </strong>but “Who will succeed at SPEED-UP, in this specific context, starting tomorrow?”</div></div>
+<div class="section"><div class="sec-title">Your deliverables</div>
+<div class="card">→ The team Excel grid (20 justified scores, final choice, 3 arguments)<br/>→ A 3-minute pitch: your choice and why not the other 3<br/>→ Employer branding bonus: a catchphrase for the job ad<br/><br/><strong style="color:var(--orange)">A good argument:</strong> a fact (who says what), what it reveals, and the SPEED-UP constraint it relates to.</div></div>
+<div class="section"><div class="sec-title">Going further: employer branding</div><div class="card" style="margin-bottom:8px">SPEED-UP still has to hire 8 sales reps. The chosen candidate will be the face of the team for the next hires.</div><div class="three"><div class="mini"><strong>Q1</strong>Which SPEED-UP values does your candidate embody?</div><div class="mini"><strong>Q2</strong>How would you write the job ad to attract this profile and discourage the others?</div><div class="mini"><strong>Q3</strong>How should you speak to rejected candidates so they keep a good image of the company?</div></div></div>
+</div>
+</div>
+<div class="footer">Avatar Sales Academy</div>
+</div>
+<script>
+function st(tab){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('main-'+tab).classList.add('active');
+  event.currentTarget.classList.add('active');
+}
+</script>
+</body>
+</html>
